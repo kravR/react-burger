@@ -1,4 +1,22 @@
-.container {
+.constructor {
   display: flex;
+  flex-direction: column;
   flex: 1;
+}
+
+.constructor__items {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.constructor__item {
+  display: flex;
+  align-items: center; 
+}
+
+.constructor__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }

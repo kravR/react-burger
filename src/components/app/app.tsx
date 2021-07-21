@@ -17,7 +17,7 @@ const App = () => {
         </h1>
         <div className={styles.main}>
           <BurgerIngredients data={data} />
-          <BurgerConstructor />
+          <BurgerConstructor data={data} />
         </div>
       </Container>
     </>

@@ -11,5 +11,6 @@
 .ingredients__content {
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  overflow-y: scroll;
+  height: 100%;
 }
