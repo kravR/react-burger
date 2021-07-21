@@ -1,20 +1,25 @@
 import AppHeader from "../app-header/app-header";
+import Container from "../container/container";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 
 import styles from "./app.module.css";
 
+import { data } from '../../utils/data.js';
+
 const App = () => {
   return (
     <>
       <AppHeader />
-      <main className={`${styles.main} pt-10`}>
-        <h1 className="text text_type_main-large mb-5">Соберите бургер</h1>
-        <div className={styles.main__container}>
-          <BurgerIngredients />
+      <Container>
+        <h1 className="text text_type_main-large mt-10 mb-5">
+          Соберите бургер
+        </h1>
+        <div className={styles.main}>
+          <BurgerIngredients data={data} />
           <BurgerConstructor />
         </div>
-      </main>
+      </Container>
     </>
   );
 };

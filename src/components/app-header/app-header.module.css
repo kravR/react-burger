@@ -1,5 +1,6 @@
 .header {
   background: var(--background);
+  min-height: 88px;
 }
 
 .header__container {

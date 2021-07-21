@@ -1,9 +1,10 @@
 import {
-  Logo,
   BurgerIcon,
   ListIcon,
+  Logo,
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+
 import styles from "./app-header.module.css";
 
 const AppHeader = () => {
@@ -11,7 +12,10 @@ const AppHeader = () => {
     <header className={styles.header}>
       <div className={`${styles.header__container} pt-4 pb-4`}>
         <nav className={styles.header__nav}>
-          <a className={`${styles.header__link} pt-4 pr-5 pb-4 pl-5 mr-2`} href="/">
+          <a
+            className={`${styles.header__link} pt-4 pr-5 pb-4 pl-5 mr-2`}
+            href="/"
+          >
             <BurgerIcon type="primary" />
             <span className="text text_type_main-default ml-2">
               Конструктор
@@ -31,7 +35,7 @@ const AppHeader = () => {
 
         <div className={styles.header__user}>
           <a className={`${styles.header__link} pt-4 pr-5 pb-4 pl-5`} href="/">
-            <ProfileIcon type="secondary"/>
+            <ProfileIcon type="secondary" />
             <span className="text text_type_main-default ml-2 text_color_inactive">
               Личный кабинет
             </span>
