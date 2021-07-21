@@ -14,7 +14,7 @@ import styles from "./burger-constructor.module.css";
 const BurgerConstructor = ({ data }) => {
   return (
     <div className={`${styles.constructor} pl-4`}>
-      <div className={`${styles.constructor__items} scrollbar pr-2 mb-10`}>
+      <div className={`${styles.constructor__items} mb-10`}>
         {data.slice(0, 1).map((item) => (
           <div
             className={`${styles.constructor__item} ml-8 mb-4`}
@@ -30,16 +30,18 @@ const BurgerConstructor = ({ data }) => {
           </div>
         ))}
 
-        {data.slice(1, data.length - 1).map((item) => (
-          <div className={`${styles.constructor__item} ml-2 mb-4`} key={item._id}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              price={item.price}
-              text={item.name}
-              thumbnail={item.image_mobile}
-            />
-          </div>
-        ))}
+        <div className={`${styles["constructor__items-inner"]} pr-2 scrollbar`}>
+          {data.slice(1, data.length - 1).map((item) => (
+            <div className={`${styles.constructor__item} ml-2 mb-4`} key={item._id}>
+              <DragIcon type="primary" />
+              <ConstructorElement
+                price={item.price}
+                text={item.name}
+                thumbnail={item.image_mobile}
+              />
+            </div>
+          ))}
+        </div>
 
         {data.slice(0, 1).map((item) => (
           <div className={`${styles.constructor__item} ml-8`} key={item._id}>
@@ -67,7 +69,7 @@ const BurgerConstructor = ({ data }) => {
 };
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(cardObj),
+  data: PropTypes.arrayOf(cardObj).isRequired,
 };
 
 export default BurgerConstructor;

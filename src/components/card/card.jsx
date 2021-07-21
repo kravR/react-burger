@@ -24,7 +24,7 @@ const Card = ({ data }) => {
 };
 
 Card.propTypes = {
-  data: cardObj,
+  data: cardObj.isRequired,
 };
 
 export default Card;

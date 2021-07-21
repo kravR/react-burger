@@ -63,7 +63,7 @@ const BurgerIngredients = ({ data }) => {
 };
 
 BurgerIngredients.propTypes = {
-  array: PropTypes.array,
+  data: PropTypes.array.isRequired,
 };
 
 export default BurgerIngredients;

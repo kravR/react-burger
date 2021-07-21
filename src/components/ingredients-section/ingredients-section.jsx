@@ -24,8 +24,8 @@ const IngredientsSection = ({ title, data }) => {
 };
 
 IngredientsSection.propTypes = {
-  title: PropTypes.string,
-  data: PropTypes.arrayOf(cardObj),
+  title: PropTypes.string.isRequired,
+  data: PropTypes.arrayOf(cardObj).isRequired,
 };
 
 export default IngredientsSection;

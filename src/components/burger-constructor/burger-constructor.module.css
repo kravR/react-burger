@@ -2,12 +2,13 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+  height: 100%;
 }
 
 .constructor__items {
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
+  height: calc(100% - 104px);
 }
 
 .constructor__item {
@@ -15,8 +16,15 @@
   align-items: center; 
 }
 
+.constructor__items-inner {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
 .constructor__bottom {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  height: 64px;
 }
