@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import {
   Counter,
   CurrencyIcon,
@@ -7,9 +9,9 @@ import { cardObj } from "../../utils/types";
 
 import styles from "./card.module.css";
 
-const Card = ({ data }) => {
+const Card = ({ data, onDetail }) => {
   return (
-    <article className={styles.card}>
+    <article className={styles.card} onClick={() => onDetail(data._id)}>
       <img src={data.image} alt={data.name} className={styles.card__img} />
       <div className={`${styles.card__price} mt-1 mb-1`}>
         <span className="text text_type_digits-default mr-1">{data.price}</span>
@@ -25,6 +27,7 @@ const Card = ({ data }) => {
 
 Card.propTypes = {
   data: cardObj.isRequired,
+  onDetail: PropTypes.func.isRequired,
 };
 
 export default Card;

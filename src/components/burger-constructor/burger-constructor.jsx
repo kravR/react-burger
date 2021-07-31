@@ -1,3 +1,4 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 
 import {
@@ -8,10 +9,22 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import { cardObj } from "../../utils/types";
+import Modal from "../modal/modal";
+import OrderDetails from "../order-details/order-details";
 
 import styles from "./burger-constructor.module.css";
 
 const BurgerConstructor = ({ data }) => {
+  const [visibleModal, setVisibleModal] = useState(false);
+
+  const handleOrderDetails = () => {
+    setVisibleModal(true);
+  };
+
+  const closeModal = () => {
+    setVisibleModal(false);
+  };
+
   return (
     <div className={`${styles.constructor} pl-4`}>
       <div className={`${styles.constructor__items} mb-10`}>
@@ -60,10 +73,15 @@ const BurgerConstructor = ({ data }) => {
           <span className="text text_type_digits-medium mr-2">610</span>
           <CurrencyIcon type="primary" />
         </div>
-        <Button type="primary" size="large">
+        <Button type="primary" size="large" onClick={handleOrderDetails}>
           Оформить заказ
         </Button>
       </div>
+      {visibleModal && (
+        <Modal onClose={closeModal}>
+          <OrderDetails order={"034536"}/>
+        </Modal>
+      )}
     </div>
   );
 };
