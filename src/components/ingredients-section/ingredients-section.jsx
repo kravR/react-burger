@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import PropTypes from "prop-types";
 
 import Card from "../card/card";
@@ -9,7 +9,7 @@ import { cardObj } from "../../utils/types";
 
 import styles from "./ingredients-section.module.css";
 
-const IngredientsSection = ({ title, data }) => {
+const IngredientsSection = forwardRef(({title, data}, ref) => {
   const [visibleModal, setVisibleModal] = useState(false);
   const [selectedCard, setSelectedCard] = useState([]);
 
@@ -24,7 +24,7 @@ const IngredientsSection = ({ title, data }) => {
 
   return (
     <>
-      {title && <h3 className="text text_type_main-medium pb-6">{title}</h3>}
+      {title && <h3 className="text text_type_main-medium pb-6" ref={ref}>{title}</h3>}
 
       {data && (
         <div className={`${styles.section} pt-6 pr-2 pb-6 pl-4`}>
@@ -44,7 +44,7 @@ const IngredientsSection = ({ title, data }) => {
       )}
     </>
   );
-};
+});
 
 IngredientsSection.propTypes = {
   title: PropTypes.string.isRequired,

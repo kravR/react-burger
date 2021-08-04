@@ -14,10 +14,15 @@ export const useFetch = (url) => {
           "Content-Type": "application/json",
         },
       });
+      if (!response.ok) {
+        setError(true);
+        throw new Error('Ответ сети был не ok.');
+      }
       const result = await response.json();
       setData(result.data);
     } catch (e) {
       setError(true);
+      //console.error('Возникла проблема с вашим fetch запросом: ', e.message);
     } finally {
       setIsLoading(false);
     }
