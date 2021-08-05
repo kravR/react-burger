@@ -5,6 +5,7 @@
   align-items: center;
   width: 272px;
   margin-bottom: 32px;
+  cursor: pointer;
 }
 
 .card__img {

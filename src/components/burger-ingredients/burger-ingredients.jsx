@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -7,55 +7,64 @@ import IngredientsSection from "../ingredients-section/ingredients-section";
 
 import styles from "./burger-ingredients.module.css";
 
-const tabs = {
-  bun: 0,
-  sauce: 1,
-  main: 2,
-};
-
 const BurgerIngredients = ({ data }) => {
-  const [currentTab, setCurrentTab] = useState(tabs.bun);
+  const [currentTab, setCurrentTab] = useState("bun");
 
-  const handleTabChange = (tab) => () => setCurrentTab(tab);
+  const tabs = [
+    {
+      id: "bun",
+      title: "Булки",
+      refToSection: useRef(null),
+      data: data.filter((item) => item.type === "bun")
+    },
+    {
+      id: "sauce",
+      title: "Соусы",
+      refToSection: useRef(null),
+      data: data.filter((item) => item.type === "sauce")
+    },
+    {
+      id: "main",
+      title: "Начинки",
+      refToSection: useRef(null),
+      data: data.filter((item) => item.type === "main")
+    },
+  ];
 
-  const bunData = data.filter((item) => item.type === "bun");
-  const sauceData = data.filter((item) => item.type === "sauce");
-  const mainData = data.filter((item) => item.type === "main");
+  const handleTabChange = (tab) => () => {
+    setCurrentTab(tab.id);
+  };
+
+  useEffect(() => {
+    tabs
+      .find((tab) => tab.id === currentTab)
+      .refToSection.current.scrollIntoView({ behavior: "smooth" });
+  })
 
   return (
     <div className={styles.ingredients}>
       <div className={`${styles.ingredients__tabs} mb-10`}>
-        <Tab
-          value={`${tabs.bun}`}
-          active={currentTab === tabs.bun}
-          onClick={handleTabChange(tabs.bun)}
-        >
-          Булки
-        </Tab>
-        <Tab
-          value={`${tabs.sauce}`}
-          active={currentTab === tabs.sauce}
-          onClick={handleTabChange(tabs.sauce)}
-        >
-          Соусы
-        </Tab>
-        <Tab
-          value={`${tabs.main}`}
-          active={currentTab === tabs.main}
-          onClick={handleTabChange(tabs.main)}
-        >
-          Начинки
-        </Tab>
+        {tabs.map((tab) => (
+            <Tab
+              key={tab.id}
+              value={tab.title}
+              active={tab.id === currentTab}
+              onClick={handleTabChange(tab)}
+            >
+              {tab.title}
+            </Tab>
+          )
+        )}
       </div>
       <div className={`${styles.ingredients__content} scrollbar`}>
-        {currentTab === tabs.bun && (
-          <IngredientsSection title="Булки" data={bunData} />
-        )}
-        {currentTab === tabs.sauce && (
-          <IngredientsSection title="Соусы" data={sauceData} />
-        )}
-        {currentTab === tabs.main && (
-          <IngredientsSection title="Начинки" data={mainData} />
+        {tabs.map((tab) => (
+            <IngredientsSection
+              key={tab.id}
+              title={tab.title}
+              data={tab.data}
+              ref={tab.refToSection}
+            />
+          )
         )}
       </div>
     </div>

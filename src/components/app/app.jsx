@@ -3,11 +3,15 @@ import Container from "../container/container";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 
+import { useFetch } from '../../hooks/useFetch';
+
+import { API_URL_INGREDIENTS } from '../../utils/constants';
+
 import styles from "./app.module.css";
 
-import { data } from '../../utils/data.js';
-
 const App = () => {
+  const { data, isLoading, isError } = useFetch(API_URL_INGREDIENTS);
+
   return (
     <>
       <AppHeader />
@@ -16,8 +20,18 @@ const App = () => {
           Соберите бургер
         </h1>
         <div className={styles.main}>
-          <BurgerIngredients data={data} />
-          <BurgerConstructor data={data} />
+          {isLoading ? (
+            <div>...загрузка</div>
+          ): (
+            isError ? (
+              <div>Произошла ошибка при получении данных</div>
+            ): (
+              <>
+                <BurgerIngredients data={data} />
+                <BurgerConstructor data={data} />
+              </>
+            )
+          )}          
         </div>
       </Container>
     </>
