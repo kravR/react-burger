@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import PropTypes from "prop-types";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -7,27 +7,32 @@ import IngredientsSection from "../ingredients-section/ingredients-section";
 
 import styles from "./burger-ingredients.module.css";
 
-const BurgerIngredients = ({ data }) => {
+const BurgerIngredients = () => {
   const [currentTab, setCurrentTab] = useState("bun");
+  const { data } = useSelector((store) => store.ingredients);
+
+  const bun = useMemo(() => data?.filter((item) => item.type === "bun"), [data]);
+  const sauce = useMemo(() => data?.filter((item) => item.type === "sauce"), [data]);
+  const main = useMemo(() => data?.filter((item) => item.type === "main"), [data]);
 
   const tabs = [
     {
       id: "bun",
       title: "Булки",
       refToSection: useRef(null),
-      data: data.filter((item) => item.type === "bun")
+      data: bun
     },
     {
       id: "sauce",
       title: "Соусы",
       refToSection: useRef(null),
-      data: data.filter((item) => item.type === "sauce")
+      data: sauce
     },
     {
       id: "main",
       title: "Начинки",
       refToSection: useRef(null),
-      data: data.filter((item) => item.type === "main")
+      data: main
     },
   ];
 
@@ -69,10 +74,6 @@ const BurgerIngredients = ({ data }) => {
       </div>
     </div>
   );
-};
-
-BurgerIngredients.propTypes = {
-  data: PropTypes.array.isRequired,
 };
 
 export default BurgerIngredients;
