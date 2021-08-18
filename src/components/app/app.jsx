@@ -14,9 +14,7 @@ import styles from "./app.module.css";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { data, isLoading, isError } = useSelector(
-    (store) => store.ingredients
-  );
+  const { isLoading, isError } = useSelector((store) => store.ingredients);
 
   useEffect(() => {
     dispatch(getIngredientsData());
@@ -37,7 +35,7 @@ const App = () => {
           ) : (
             <DndProvider backend={HTML5Backend}>
               <BurgerIngredients />
-              <BurgerConstructor data={data} />
+              <BurgerConstructor />
             </DndProvider>
           )}
         </div>

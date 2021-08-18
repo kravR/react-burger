@@ -8,7 +8,7 @@ import {
 } from "../actions/order";
 
 export const initialState = {
-  number: "",
+  number: 0,
   ingredients: [],
   isLoading: false,
   isError: false,

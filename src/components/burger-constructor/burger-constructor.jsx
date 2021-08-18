@@ -202,7 +202,7 @@ const BurgerConstructor = () => {
 
       {visibleModal && (
         <Modal onClose={closeModal}>
-          <OrderDetails order={number} />
+          <OrderDetails order={`${number}`} />
         </Modal>
       )}
     </div>
