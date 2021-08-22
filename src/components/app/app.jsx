@@ -1,16 +1,24 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+
 import AppHeader from "../app-header/app-header";
 import Container from "../container/container";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 
-import { useFetch } from '../../hooks/useFetch';
-
-import { API_URL_INGREDIENTS } from '../../utils/constants';
+import { getIngredientsData } from "../../services/actions/burger-ingredients";
 
 import styles from "./app.module.css";
 
 const App = () => {
-  const { data, isLoading, isError } = useFetch(API_URL_INGREDIENTS);
+  const dispatch = useDispatch();
+  const { isLoading, isError } = useSelector((store) => store.ingredients);
+
+  useEffect(() => {
+    dispatch(getIngredientsData());
+  }, [dispatch]);
 
   return (
     <>
@@ -22,16 +30,14 @@ const App = () => {
         <div className={styles.main}>
           {isLoading ? (
             <div>...загрузка</div>
-          ): (
-            isError ? (
-              <div>Произошла ошибка при получении данных</div>
-            ): (
-              <>
-                <BurgerIngredients data={data} />
-                <BurgerConstructor data={data} />
-              </>
-            )
-          )}          
+          ) : isError ? (
+            <div>Произошла ошибка при получении данных</div>
+          ) : (
+            <DndProvider backend={HTML5Backend}>
+              <BurgerIngredients />
+              <BurgerConstructor />
+            </DndProvider>
+          )}
         </div>
       </Container>
     </>
