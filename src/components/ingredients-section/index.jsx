@@ -2,9 +2,9 @@ import { forwardRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
-import Card from "../card/card";
-import Modal from "../modal/modal";
-import IngredientDetails from "../ingredient-details/ingredient-details";
+import Card from "../card";
+import Modal from "../modal";
+import IngredientDetails from "../ingredient-details";
 
 import {
   OPEN_INGREDIENT_DETAILS,

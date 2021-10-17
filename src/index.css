@@ -18,11 +18,3 @@ body {
 .scrollbar::-webkit-scrollbar-track {
   background: #2f2f37;
 }
-
-/* castom constructor-element to react-developer-burger-ui-components */ 
-.constructor-element {
-  width: 100%;
-}
-.constructor-element__text {
-  width: 100%;
-}

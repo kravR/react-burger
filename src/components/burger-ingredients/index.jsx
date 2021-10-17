@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import IngredientsSection from "../ingredients-section/ingredients-section";
+import IngredientsSection from "../ingredients-section";
 
 import styles from "./burger-ingredients.module.css";
 

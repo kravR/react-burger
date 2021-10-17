@@ -8,9 +8,9 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import Modal from "../modal/modal";
-import OrderDetails from "../order-details/order-details";
-import DraggableElement from "../draggable-element/draggable-element";
+import Modal from "../modal";
+import OrderDetails from "../order-details";
+import DraggableElement from "../draggable-element";
 
 import {
   ADD_BUN,

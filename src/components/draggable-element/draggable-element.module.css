@@ -2,3 +2,10 @@
   display: flex;
   align-items: center; 
 }
+
+:global(.constructor-element) {
+  width: 100%;
+}
+:global(.constructor-element__text) {
+  width: 100%;
+}
