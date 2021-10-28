@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 
@@ -34,7 +35,9 @@ import {
 import styles from "./burger-constructor.module.css";
 
 const BurgerConstructor = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
+  const { isAuthorized } = useSelector((store) => store.auth);
   const { bun, filling } = useSelector((store) => store.burger);
   const { visibleModal, number, ingredients } = useSelector(
     (store) => store.order
@@ -44,10 +47,14 @@ const BurgerConstructor = () => {
   if (bun) cost += 2 * bun.price;
 
   const handleCreateOrder = () => {
-    dispatch(getOrder({ ingredients }));
-    dispatch({ type: OPEN_ORDER_MODAL });
-    dispatch({ type: RESET_CONSTRUCTOR });
-    dispatch({ type: CLEAR_INGREDIENTS_COUNT });
+    if (isAuthorized) {
+      dispatch(getOrder({ ingredients }));
+      dispatch({ type: OPEN_ORDER_MODAL });
+      dispatch({ type: RESET_CONSTRUCTOR });
+      dispatch({ type: CLEAR_INGREDIENTS_COUNT });
+    } else {
+      history.push("/login");
+    }
   };
 
   const closeModal = () => {
@@ -200,7 +207,7 @@ const BurgerConstructor = () => {
         </div>
       )}
 
-      {visibleModal && (
+      {isAuthorized && visibleModal && (
         <Modal onClose={closeModal}>
           <OrderDetails order={`${number}`} />
         </Modal>

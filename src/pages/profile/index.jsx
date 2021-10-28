@@ -1,66 +1,68 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { NavLink, Route, Switch, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
-import {
-  Button,
-  Input,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { ProfileForm } from "./profile-form";
+import { ProfileOrders } from "./profile-orders";
 
-import { Container } from "../../components/container";
-import { Form } from "../../components/form";
+import { getUser, logout } from "../../services/actions/auth";
 
 import styles from "./profile.module.css";
 
 export const Profile = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const handleClickLogOut = async () => {
+    await dispatch(logout());
+    history.replace({ pathname: "/login" });
+  };
+
+  useEffect(() => {
+    dispatch(getUser());
+  }, [dispatch]);
+
   return (
-    <Container>
-      <div className={styles.page}>
-        <div className={styles.menu}>
-          <Link
-            to="/profile"
-            className={`${styles.link} ${styles.active} text text_type_main-medium active`}
-          >
-            Профиль
-          </Link>
-          <div className={`${styles.link} text text_type_main-medium text_color_inactive`}>
-            История заказов
-          </div>
-          <div
-            className={`${styles.link} text text_type_main-medium text_color_inactive`}
-          >
-            Выход
-          </div>
-          <div className="text text_type_main-default text_color_inactive mt-20">
-            В этом разделе вы можете
-            <br />
-            изменить свои персональные данные
-          </div>
+    <div className={styles.page}>
+      <div className={styles.menu}>
+        <NavLink
+          exact
+          to="/profile"
+          activeClassName={styles.link_active}
+          className={`${styles.link} text text_type_main-medium`}
+        >
+          Профиль
+        </NavLink>
+        <NavLink
+          exact
+          to="/profile/orders"
+          activeClassName={styles.link_active}
+          className={`${styles.link} text text_type_main-medium`}
+        >
+          История заказов
+        </NavLink>
+        <div
+          className={`${styles.link} text text_type_main-medium`}
+          onClick={handleClickLogOut}
+        >
+          Выход
         </div>
-        <div className={styles.content}>
-          <Form>
-            <Input type="text" name="name" placeholder="Имя" icon="EditIcon" />
-            <Input
-              type="email"
-              name="email"
-              placeholder="Логин"
-              icon="EditIcon"
-            />
-            <Input
-              type="password"
-              name="password"
-              placeholder="Пароль"
-              icon="EditIcon"
-            />
-            <div className={styles.form_btns}>
-              <Button type="secondary" size="medium">
-                Отмена
-              </Button>
-              <Button type="primary" size="medium">
-                Сохранить
-              </Button>
-            </div>
-          </Form>
+        <div className="text text_type_main-default text_color_inactive mt-20">
+          В этом разделе вы можете
+          <br />
+          изменить свои персональные данные
         </div>
       </div>
-    </Container>
+      <div className={styles.content}>
+        <Switch>
+          <Route path="/profile" exact>
+            <ProfileForm />
+          </Route>
+          <Route path="/profile/orders" exact>
+            <ProfileOrders />
+          </Route>
+        </Switch>
+      </div>
+    </div>
   );
 };

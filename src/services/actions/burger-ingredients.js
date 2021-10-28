@@ -1,4 +1,5 @@
-import { API_URL_INGREDIENTS } from "../../utils/constants";
+import publicApi from "../../services/publicApi.service";
+import { API_ENDPOINTS } from "../../utils/constants";
 
 export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
 export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";
@@ -14,19 +15,8 @@ export const getIngredientsData = () => (dispatch) => {
     type: GET_INGREDIENTS_REQUEST,
   });
 
-  return fetch(API_URL_INGREDIENTS, {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Что-то пошло не так.");
-      }
-      return response.json();
-    })
+  publicApi
+    .get(API_ENDPOINTS.INGREDIENTS)
     .then((response) => {
       if (response && response.success) {
         dispatch({

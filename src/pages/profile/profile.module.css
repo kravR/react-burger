@@ -19,9 +19,15 @@
   align-items: center;
   text-decoration: none;
   white-space: nowrap;
+  color: #8585ad;
 }
 
-.link.active {
+.link:hover {
+  cursor: pointer;
+  color: #f2f2f3;
+}
+
+.link_active {
   color: #fff;
 }
 

@@ -1,3 +1,5 @@
+import { Link, NavLink, useRouteMatch } from "react-router-dom";
+
 import {
   BurgerIcon,
   ListIcon,
@@ -8,39 +10,52 @@ import {
 import styles from "./header.module.css";
 
 export const Header = () => {
+  const isConstructor = !!useRouteMatch({ path: "/", exact: true });
+  const isFeed = !!useRouteMatch("/feed");
+  const isProfile = !!useRouteMatch("/profile");
+
   return (
     <header className={styles.header}>
-      <div className={`${styles.header__container} pt-4 pb-4`}>
-        <nav className={styles.header__nav}>
-          <a
-            className={`${styles.header__link} pt-4 pr-5 pb-4 pl-5 mr-2`}
-            href="/"
+      <div className={`${styles.container} pt-4 pb-4`}>
+        <nav className={styles.nav}>
+          <NavLink
+            exact
+            to="/"
+            activeClassName={styles.link_active}
+            className={`${styles.link} pt-4 pr-5 pb-4 pl-5 mr-2`}
           >
-            <BurgerIcon type="primary" />
+            <BurgerIcon type={isConstructor ? "primary" : "secondary"} />
             <span className="text text_type_main-default ml-2">
               Конструктор
             </span>
-          </a>
-          <a className={`${styles.header__link} pt-4 pr-5 pb-4 pl-5`} href="/">
-            <ListIcon type="secondary" />
-            <span className="text text_type_main-default ml-2 text_color_inactive">
+          </NavLink>
+          <NavLink
+            exact
+            to="/feed"
+            activeClassName={styles.link_active}
+            className={`${styles.link} pt-4 pr-5 pb-4 pl-5`}
+          >
+            <ListIcon type={isFeed ? "primary" : "secondary"} />
+            <span className="text text_type_main-default ml-2">
               Лента заказов
             </span>
-          </a>
-        </nav>
+          </NavLink>
 
-        <a href="/" className={styles.header__logo}>
-          <Logo />
-        </a>
+          <Link to="/" className={styles.logo}>
+            <Logo />
+          </Link>
 
-        <div className={styles.header__user}>
-          <a className={`${styles.header__link} pt-4 pr-5 pb-4 pl-5`} href="/">
-            <ProfileIcon type="secondary" />
-            <span className="text text_type_main-default ml-2 text_color_inactive">
+          <NavLink
+            to="/profile"
+            activeClassName={styles.link_active}
+            className={`${styles.profile} ${styles.link} pt-4 pr-5 pb-4 pl-5`}
+          >
+            <ProfileIcon type={isProfile ? "primary" : "secondary"} />
+            <span className="text text_type_main-default ml-2">
               Личный кабинет
             </span>
-          </a>
-        </div>
+          </NavLink>
+        </nav>
       </div>
     </header>
   );
