@@ -1,6 +1,5 @@
-import publicApi from "../../services/publicApi.service";
-import privateApi from "../../services/privateApi.service";
-import { API_ENDPOINTS } from "../../utils/constants";
+import * as authService from "../../api/auth";
+import * as userService from "../../api/user";
 
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
@@ -35,20 +34,10 @@ export const registration = (formValues) => (dispatch) => {
     type: REGISTRATION_REQUEST,
   });
 
-  if (formValues) {
-    publicApi
-      .post(API_ENDPOINTS.REGISTRATION, JSON.stringify(formValues))
-      .then((response) => {
-        localStorage.setItem("refreshToken", response.refreshToken);
-        localStorage.setItem("accessToken", response.accessToken);
-
-        dispatch({
-          type: REGISTRATION_SUCCESS,
-          user: response.user,
-        });
-      })
-      .catch(() => dispatch({ type: REGISTRATION_FAILED }));
-  }
+  return authService
+    .registration(formValues)
+    .then((user) => dispatch({ type: REGISTRATION_SUCCESS, user }))
+    .catch((error) => dispatch({ type: REGISTRATION_FAILED, error }));
 };
 
 export const login = (formValues) => (dispatch) => {
@@ -56,21 +45,10 @@ export const login = (formValues) => (dispatch) => {
     type: LOGIN_REQUEST,
   });
 
-  if (formValues) {
-    publicApi
-      .post(API_ENDPOINTS.LOGIN, JSON.stringify(formValues))
-      .then((response) => {
-        localStorage.setItem("refreshToken", response.refreshToken);
-        localStorage.setItem("accessToken", response.accessToken);
-        dispatch({
-          type: LOGIN_SUCCESS,
-          user: response.user,
-        });
-      })
-      .catch(() => {
-        dispatch({ type: LOGIN_FAILED });
-      });
-  }
+  return authService
+    .login(formValues)
+    .then((user) => dispatch({ type: LOGIN_SUCCESS, user }))
+    .catch((error) => dispatch({ type: LOGIN_FAILED, error }));
 };
 
 export const logout = () => (dispatch) => {
@@ -78,81 +56,10 @@ export const logout = () => (dispatch) => {
     type: LOGOUT_REQUEST,
   });
 
-  const refreshToken = localStorage.getItem("refreshToken") ?? "";
-
-  publicApi
-    .post(API_ENDPOINTS.LOGOUT, JSON.stringify({ token: refreshToken }))
-    .then((response) => {
-      localStorage.removeItem("refreshToken");
-      localStorage.removeItem("accessToken");
-      dispatch({ type: LOGOUT_SUCCESS });
-    })
-    .catch(() => {
-      dispatch({ type: LOGOUT_FAILED });
-    });
-};
-
-export const getUser = () => (dispatch) => {
-  dispatch({
-    type: USER_REQUEST,
-  });
-  refreshToken();
-  privateApi
-    .get(API_ENDPOINTS.USER_INFO)
-    .then((response) => {
-      dispatch({
-        type: USER_SUCCESS,
-        user: response.user,
-      });
-    })
-    .catch(() => {
-      dispatch({ type: USER_FAILED });
-    });
-};
-
-export const updateUser = (formValues) => (dispatch) => {
-  dispatch({
-    type: USER_REQUEST,
-  });
-
-  if (formValues) {
-    refreshToken();
-    privateApi
-      .patch(API_ENDPOINTS.USER_INFO, JSON.stringify(formValues))
-      .then((response) => {
-        dispatch({
-          type: USER_SUCCESS,
-          user: response.user,
-        });
-      })
-      .catch(() => {
-        dispatch({ type: USER_FAILED });
-      });
-  }
-};
-
-export const refreshToken = () => (dispatch) => {
-  dispatch({
-    type: UPDATE_TOKEN_REQUEST,
-  });
-
-  privateApi
-    .post(
-      API_ENDPOINTS.UPDATE_TOKEN,
-      JSON.stringify({
-        token: localStorage.getItem("refreshToken"),
-      })
-    )
-    .then((response) => {
-      localStorage.setItem("refreshToken", response.refreshToken);
-      localStorage.setItem("accessToken", response.accessToken);
-      dispatch({ type: UPDATE_TOKEN_SUCCESS });
-    })
-    .catch(() => {
-      localStorage.removeItem("refreshToken");
-      localStorage.removeItem("accessToken");
-      dispatch({ type: UPDATE_TOKEN_FAILED });
-    });
+  return authService
+    .logout()
+    .then(() => dispatch({ type: LOGOUT_SUCCESS }))
+    .catch(() => dispatch({ type: LOGOUT_FAILED }));
 };
 
 export const forgotPassword = (formValues) => (dispatch) => {
@@ -160,16 +67,10 @@ export const forgotPassword = (formValues) => (dispatch) => {
     type: FORGOT_PASSWORD_REQUEST,
   });
 
-  if (formValues) {
-    publicApi
-      .post(API_ENDPOINTS.FORGOT_PASSWORD, JSON.stringify(formValues))
-      .then(() => {
-        dispatch({ type: FORGOT_PASSWORD_SUCCESS });
-      })
-      .catch(() => {
-        dispatch({ type: FORGOT_PASSWORD_FAILED });
-      });
-  }
+  return authService
+    .forgotPassword(formValues)
+    .then(() => dispatch({ type: FORGOT_PASSWORD_SUCCESS }))
+    .catch(() => dispatch({ type: FORGOT_PASSWORD_FAILED }));
 };
 
 export const resetPassword = (formValues) => (dispatch) => {
@@ -177,14 +78,30 @@ export const resetPassword = (formValues) => (dispatch) => {
     type: RESET_PASSWORD_REQUEST,
   });
 
-  if (formValues) {
-    publicApi
-      .post(API_ENDPOINTS.RESET_PASSWORD, JSON.stringify(formValues))
-      .then(() => {
-        dispatch({ type: RESET_PASSWORD_SUCCESS });
-      })
-      .catch(() => {
-        dispatch({ type: RESET_PASSWORD_FAILED });
-      });
-  }
+  return authService
+    .resetPassword(formValues)
+    .then(() => dispatch({ type: RESET_PASSWORD_SUCCESS }))
+    .catch(() => dispatch({ type: RESET_PASSWORD_FAILED }));
+};
+
+export const getUser = () => (dispatch) => {
+  dispatch({
+    type: USER_REQUEST,
+  });
+
+  return userService
+    .getUser()
+    .then((user) => dispatch({ type: USER_SUCCESS, user }))
+    .catch((error) => dispatch({ type: USER_FAILED, error }));
+};
+
+export const updateUser = (formValues) => (dispatch) => {
+  dispatch({
+    type: USER_REQUEST,
+  });
+
+  return userService
+    .updateUser(formValues)
+    .then((user) => dispatch({ type: USER_SUCCESS, user }))
+    .catch((error) => dispatch({ type: USER_FAILED, error }));
 };

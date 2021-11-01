@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, memo } from "react";
 import { NavLink, Route, Switch, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -9,7 +9,7 @@ import { getUser, logout } from "../../services/actions/auth";
 
 import styles from "./profile.module.css";
 
-export const Profile = () => {
+export const Profile = memo(() => {
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -65,4 +65,4 @@ export const Profile = () => {
       </div>
     </div>
   );
-};
+});

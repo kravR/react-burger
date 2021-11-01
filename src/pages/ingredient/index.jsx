@@ -10,15 +10,15 @@ import styles from "./ingredient.module.css";
 
 export const IngredientPage = () => {
   const dispatch = useDispatch();
-  const { data } = useSelector((store) => store.ingredients);
+  const { ingredients } = useSelector((store) => store.ingredients);
   const { ingredientId } = useParams();
 
   useEffect(() => {
     dispatch({
       type: SELECT_INGREDIENT,
-      data: data.find((item) => item._id === ingredientId),
+      ingredient: ingredients.find((item) => item._id === ingredientId),
     });
-  }, [dispatch, data, ingredientId]);
+  }, [dispatch, ingredients, ingredientId]);
 
   return (
     <div className={styles.ingredient}>

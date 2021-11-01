@@ -22,7 +22,7 @@ const IngredientsSection = forwardRef(({ title, data }, ref) => {
   const handleCardDetail = (id) => {
     dispatch({
       type: SELECT_INGREDIENT,
-      data: data.find((item) => item._id === id),
+      ingredient: data.find((item) => item._id === id),
     });
     dispatch({
       type: OPEN_INGREDIENT_DETAILS,

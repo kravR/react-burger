@@ -29,9 +29,9 @@ export const ForgotPassword = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(forgotPassword(values));
+    await dispatch(forgotPassword(values));
     history.replace({
       pathname: "/reset-password",
       state: {
@@ -39,6 +39,8 @@ export const ForgotPassword = () => {
       },
     });
   };
+
+console.log(location)
 
   if (isAuthorized) {
     return (

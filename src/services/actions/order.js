@@ -1,5 +1,4 @@
-import publicApi from "../../services/publicApi.service";
-import { API_ENDPOINTS } from "../../utils/constants";
+import * as orderService from "../../api/order";
 
 export const GET_ORDER_REQUEST = "GET_ORDER_REQUEST";
 export const GET_ORDER_SUCCESS = "GET_ORDER_SUCCESS";
@@ -13,19 +12,10 @@ export const getOrder = (data) => (dispatch) => {
     type: GET_ORDER_REQUEST,
   });
 
-  publicApi
-    .post(API_ENDPOINTS.ORDERS, JSON.stringify(data))
-    .then((response) => {
-      if (response && response.success) {
-        dispatch({
-          type: GET_ORDER_SUCCESS,
-          number: response.order.number,
-        });
-      }
-    })
-    .catch(() => {
-      dispatch({
-        type: GET_ORDER_FAILED,
-      });
-    });
+  return orderService
+    .getOrder(data)
+    .then((order) =>
+      dispatch({ type: GET_ORDER_SUCCESS, number: order.number })
+    )
+    .catch(() => dispatch({ type: GET_ORDER_FAILED }));
 };

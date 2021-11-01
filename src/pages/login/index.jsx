@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
+import { Link, Redirect, useLocation } from "react-router-dom";
 
 import {
   Button,
@@ -16,9 +16,8 @@ import styles from "./login.module.css";
 
 export const LoginPage = () => {
   const { state } = useLocation();
-  const history = useHistory();
   const dispatch = useDispatch();
-  const { isAuthorized } = useSelector((store) => store.auth);
+  const { isAuthorized, isError, error } = useSelector((store) => store.auth);
 
   const [values, setFormValues] = useState({
     email: "",
@@ -34,9 +33,6 @@ export const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await dispatch(login(values));
-    history.replace({
-      pathname: state?.from.pathname || "/",
-    });
   };
 
   if (isAuthorized) {
@@ -65,6 +61,12 @@ export const LoginPage = () => {
           Войти
         </Button>
       </Form>
+
+      {isError && (
+        <p className={`${styles.error} text text_type_main-default mt-6`}>
+          {error?.message}
+        </p>
+      )}
 
       <div className={`${styles.links} mt-20 mb-4`}>
         <p className="text text_type_main-default text_color_inactive mr-1">

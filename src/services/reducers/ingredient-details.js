@@ -5,7 +5,7 @@ import {
 } from "../actions/ingredient-details";
 
 const initialState = {
-  data: {},
+  ingredient: {},
   visibleModal: false,
 };
 
@@ -14,7 +14,7 @@ export const ingredient = (state = initialState, action) => {
     case SELECT_INGREDIENT:
       return {
         ...state,
-        data: action.data,
+        ingredient: action.ingredient,
       };
     case OPEN_INGREDIENT_DETAILS:
       return {

@@ -1,5 +1,4 @@
-import publicApi from "../../services/publicApi.service";
-import { API_ENDPOINTS } from "../../utils/constants";
+import * as ingredientService from "../../api/ingredient";
 
 export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
 export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";
@@ -15,19 +14,10 @@ export const getIngredientsData = () => (dispatch) => {
     type: GET_INGREDIENTS_REQUEST,
   });
 
-  publicApi
-    .get(API_ENDPOINTS.INGREDIENTS)
-    .then((response) => {
-      if (response && response.success) {
-        dispatch({
-          type: GET_INGREDIENTS_SUCCESS,
-          data: response.data,
-        });
-      }
-    })
-    .catch(() => {
-      dispatch({
-        type: GET_INGREDIENTS_FAILED,
-      });
-    });
+  return ingredientService
+    .getIngredients()
+    .then((ingredients) =>
+      dispatch({ type: GET_INGREDIENTS_SUCCESS, ingredients })
+    )
+    .catch(() => dispatch({ type: GET_INGREDIENTS_FAILED }));
 };

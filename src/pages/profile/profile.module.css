@@ -40,3 +40,15 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.error {
+  color: var(--colors-interface-error);
+}
+
+.form :global(.input__textfield) {
+    color: var(--text-inactive-color);
+}
+
+.form :global(.input__textfield).active {
+  color: var(--text-dark);
+}

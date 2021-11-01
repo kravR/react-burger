@@ -16,3 +16,7 @@
   text-decoration: none;
   color: rgba(76, 76, 255, 1);
 }
+
+.error {
+  color: var(--colors-interface-error);
+}

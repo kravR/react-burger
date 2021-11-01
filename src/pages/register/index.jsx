@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
 
 import {
   Button,
@@ -15,9 +15,8 @@ import { registration } from "../../services/actions/auth";
 import styles from "./register.module.css";
 
 export const RegisterPage = () => {
-  const history = useHistory();
   const dispatch = useDispatch();
-  const refreshToken = localStorage.getItem("refreshToken");
+  const { isAuthorized, isError, error } = useSelector((store) => store.auth);
 
   const [values, setFormValues] = useState({
     name: "",
@@ -34,12 +33,9 @@ export const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await dispatch(registration(values));
-    history.replace({
-      pathname: "/",
-    });
   };
 
-  if (refreshToken) {
+  if (isAuthorized) {
     return <Redirect to={{ pathname: "/" }} />;
   }
 
@@ -72,6 +68,12 @@ export const RegisterPage = () => {
           Регистрация
         </Button>
       </Form>
+
+      {isError && (
+        <p className={`${styles.error} text text_type_main-default mt-6`}>
+          {error.message}
+        </p>
+      )}
 
       <div className={`${styles.links} mt-20 mb-4`}>
         <p className="text text_type_main-default text_color_inactive mr-1">

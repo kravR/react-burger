@@ -24,6 +24,7 @@ import {
 
 export const initialState = {
   user: null,
+  error: null,
   isLoading: false,
   isError: false,
   isAuthorized: Boolean(localStorage.getItem("accessToken")),
@@ -42,6 +43,7 @@ export const auth = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isError: false,
+        error: null,
         user: action.user,
         isAuthorized: true,
       };
@@ -49,8 +51,10 @@ export const auth = (state = initialState, action) => {
       return {
         ...state,
         user: {},
+        error: action.error,
         isLoading: false,
         isError: true,
+        isAuthorized: false,
       };
     case LOGOUT_REQUEST:
       return {
@@ -78,6 +82,7 @@ export const auth = (state = initialState, action) => {
       };
     case REGISTRATION_SUCCESS:
       return {
+        error: null,
         user: action.user,
         isLoading: false,
         isError: false,
@@ -86,8 +91,10 @@ export const auth = (state = initialState, action) => {
     case REGISTRATION_FAILED:
       return {
         ...state,
+        error: action.error,
         isLoading: false,
         isError: true,
+        isAuthorized: false,
       };
     case FORGOT_PASSWORD_REQUEST:
       return {
@@ -132,6 +139,7 @@ export const auth = (state = initialState, action) => {
       };
     case USER_SUCCESS:
       return {
+        error: null,
         user: action.user,
         isLoading: false,
         isError: false,
@@ -140,6 +148,7 @@ export const auth = (state = initialState, action) => {
     case USER_FAILED:
       return {
         ...state,
+        error: action.error,
         isLoading: false,
         isError: true,
       };
