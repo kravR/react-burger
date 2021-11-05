@@ -22,7 +22,6 @@ export const order = (state = initialState, action) => {
         ...state,
         isLoading: true,
       };
-
     case GET_ORDER_SUCCESS:
       return {
         ...state,
@@ -31,7 +30,6 @@ export const order = (state = initialState, action) => {
         ingredients: [],
         number: action.number,
       };
-
     case GET_ORDER_FAILED:
       return {
         ...state,

@@ -7,14 +7,16 @@ import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./draggable-element.module.css";
 
 import { cardObj } from "../../utils/types";
+
 import {
   DELETE_INGREDIENT,
   SORT_INGREDIENTS,
 } from "../../services/actions/burger-constructor";
 import { DECREASE_INGREDIENT_COUNT } from "../../services/actions/burger-ingredients";
+
+import styles from "./draggable-element.module.css";
 
 const DraggableElement = ({ index, item }) => {
   const dispatch = useDispatch();

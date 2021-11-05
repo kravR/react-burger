@@ -1,20 +1,25 @@
-import { 
+import {
+  SELECT_INGREDIENT,
   OPEN_INGREDIENT_DETAILS,
-  CLOSE_INGREDIENT_DETAILS
+  CLOSE_INGREDIENT_DETAILS,
 } from "../actions/ingredient-details";
 
 const initialState = {
-  data: {},
+  ingredient: {},
   visibleModal: false,
 };
 
 export const ingredient = (state = initialState, action) => {
   switch (action.type) {
+    case SELECT_INGREDIENT:
+      return {
+        ...state,
+        ingredient: action.ingredient,
+      };
     case OPEN_INGREDIENT_DETAILS:
       return {
         ...state,
-        data: action.data,
-        visibleModal: true
+        visibleModal: true,
       };
     case CLOSE_INGREDIENT_DETAILS:
       return initialState;

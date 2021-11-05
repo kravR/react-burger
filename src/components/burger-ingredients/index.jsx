@@ -3,17 +3,17 @@ import { useSelector } from "react-redux";
 
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import IngredientsSection from "../ingredients-section/ingredients-section";
+import IngredientsSection from "../ingredients-section";
 
 import styles from "./burger-ingredients.module.css";
 
 const BurgerIngredients = () => {
   const [currentTab, setCurrentTab] = useState("bun");
-  const { data } = useSelector((store) => store.ingredients);
+  const { ingredients } = useSelector((store) => store.ingredients);
 
-  const bun = useMemo(() => data?.filter((item) => item.type === "bun"), [data]);
-  const sauce = useMemo(() => data?.filter((item) => item.type === "sauce"), [data]);
-  const main = useMemo(() => data?.filter((item) => item.type === "main"), [data]);
+  const bun = useMemo(() => ingredients?.filter((item) => item.type === "bun"), [ingredients]);
+  const sauce = useMemo(() => ingredients?.filter((item) => item.type === "sauce"), [ingredients]);
+  const main = useMemo(() => ingredients?.filter((item) => item.type === "main"), [ingredients]);
 
   const tabs = [
     {
