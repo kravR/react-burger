@@ -1,9 +1,10 @@
-import { useSelector } from 'react-redux';
+import { FC } from "react";
+import { useSelector } from "react-redux";
 
 import styles from "./ingredient-details.module.css";
 
-const IngredientDetails = () => {
-  const { ingredient } = useSelector(store => store.ingredient);
+const IngredientDetails: FC = () => {
+  const { ingredient } = useSelector((store: any) => store.ingredient);
 
   return (
     <div className={styles.ingredient}>

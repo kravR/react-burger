@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
@@ -34,13 +34,13 @@ import {
 
 import styles from "./burger-constructor.module.css";
 
-const BurgerConstructor = () => {
+const BurgerConstructor: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { isAuthorized } = useSelector((store) => store.auth);
-  const { bun, filling } = useSelector((store) => store.burger);
+  const { isAuthorized } = useSelector((store: any) => store.auth);
+  const { bun, filling } = useSelector((store: any) => store.burger);
   const { visibleModal, number, ingredients } = useSelector(
-    (store) => store.order
+    (store: any) => store.order
   );
 
   let cost = filling.reduce((acc, item) => acc + item.price, 0);
@@ -123,7 +123,6 @@ const BurgerConstructor = () => {
                   price={bun.price}
                   text={`${bun.name} (верх)`}
                   thumbnail={bun.image_mobile}
-                  draggable={false}
                 />
               </div>
             ) : (
@@ -141,12 +140,7 @@ const BurgerConstructor = () => {
             >
               {filling.length > 0 ? (
                 filling?.map((item, index) => (
-                  <DraggableElement
-                    item={item}
-                    index={index}
-                    key={index}
-                    draggable={true}
-                  />
+                  <DraggableElement item={item} index={index} key={index} />
                 ))
               ) : (
                 /*TODO: стилизовать превью*/
@@ -167,7 +161,6 @@ const BurgerConstructor = () => {
                   price={bun.price}
                   text={`${bun.name} (низ)`}
                   thumbnail={bun.image_mobile}
-                  draggable={false}
                 />
               </div>
             ) : (

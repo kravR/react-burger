@@ -1,8 +1,11 @@
+import { FC } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-export const ProtectedRoute = ({ children, ...props }) => {
-  const { isAuthorized } = useSelector((store) => store.auth);
+import { IProps } from "./types";
+
+export const ProtectedRoute: FC<IProps> = ({ children, ...props }) => {
+  const { isAuthorized } = useSelector((store: any) => store.auth);
 
   return (
     <Route

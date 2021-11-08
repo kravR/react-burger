@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { Link, NavLink, useRouteMatch } from "react-router-dom";
 
 import {
@@ -9,7 +10,7 @@ import {
 
 import styles from "./header.module.css";
 
-export const Header = () => {
+export const Header: FC = () => {
   const isConstructor = !!useRouteMatch({ path: "/", exact: true });
   const isFeed = !!useRouteMatch("/feed");
   const isProfile = !!useRouteMatch("/profile");

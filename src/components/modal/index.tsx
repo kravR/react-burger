@@ -1,15 +1,14 @@
-import { useEffect } from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
+import { FC, useEffect } from "react";
+import ReactDOM from "react-dom";
 
-import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import ModalOverlay from '../modal-overlay';
-
+import ModalOverlay from "../modal-overlay";
+import { IProps } from "./types";
 import styles from "./modal.module.css";
 
-const Modal = ({title, onClose, children }) => {
-  const modalRoot = document.querySelector('#modals');
+const Modal: FC<IProps> = ({ title, onClose, children }) => {
+  const modalRoot = document.querySelector("#modals") as HTMLElement;
 
   useEffect(() => {
     const handleClose = (event) => {
@@ -27,14 +26,14 @@ const Modal = ({title, onClose, children }) => {
 
   return ReactDOM.createPortal(
     <>
-      <ModalOverlay onClose={onClose} onKeyDown={onClose} />
+      <ModalOverlay onClose={onClose} />
       <div className={styles.modal}>
         <div className={styles["modal__title-wrap"]}>
           <h3 className={`${styles.modal__title} text text_type_main-large`}>
             {title}
           </h3>
           <span className={styles.modal__close} onClick={onClose}>
-            <CloseIcon type='primary' />
+            <CloseIcon type="primary" />
           </span>
         </div>
         {children}
@@ -42,11 +41,6 @@ const Modal = ({title, onClose, children }) => {
     </>,
     modalRoot
   );
-};
-
-Modal.propTypes = {
-  title: PropTypes.string,
-  onClose: PropTypes.func.isRequired,
 };
 
 export default Modal;

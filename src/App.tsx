@@ -24,13 +24,15 @@ import { Container } from "./components/container";
 import { getIngredientsData } from "./services/actions/burger-ingredients";
 import { CLOSE_INGREDIENT_DETAILS } from "./services/actions/ingredient-details";
 
+import { ILocationState } from "./utils/types";
+
 const App = () => {
   const history = useHistory();
-  const location = useLocation();
+  const location = useLocation<ILocationState>();
   const dispatch = useDispatch();
 
-  const { visibleModal } = useSelector((store) => store.ingredient);
-  const { isLoading, isError } = useSelector((store) => store.ingredients);
+  const { visibleModal } = useSelector((store: any) => store.ingredient);
+  const { isLoading, isError } = useSelector((store: any) => store.ingredients);
 
   const action = history.action === "PUSH" || history.action === "REPLACE";
   const background = action && location.state && location.state.background;

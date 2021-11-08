@@ -1,5 +1,7 @@
 export class ServerError extends Error {
-  constructor(message, status) {
+  status: string = "";
+
+  constructor(message: string, status: string) {
     super(message);
     this.status = status;
   }

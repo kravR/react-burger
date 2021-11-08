@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import { FC } from "react";
 import { useDrag } from "react-dnd";
 
 import {
@@ -6,11 +6,10 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import { cardObj } from "../../utils/types";
-
+import { IProps } from "./types";
 import styles from "./card.module.css";
 
-const Card = ({ data, onDetail }) => {
+const Card: FC<IProps> = ({ data, onDetail }) => {
   const [{ opacity }, ref] = useDrag({
     type: "item",
     item: { ...data },
@@ -36,14 +35,9 @@ const Card = ({ data, onDetail }) => {
       <h3 className={`${styles.card__title} text text_type_main-default`}>
         {data?.name}
       </h3>
-      {data?.qty && <Counter count={`${data?.qty}`} size="default" />}
+      {data?.qty && <Counter count={data?.qty} size="default" />}
     </article>
   );
-};
-
-Card.propTypes = {
-  data: cardObj.isRequired,
-  onDetail: PropTypes.func.isRequired,
 };
 
 export default Card;

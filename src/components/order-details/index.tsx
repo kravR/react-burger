@@ -1,9 +1,10 @@
-import PropTypes from "prop-types";
+import { FC } from "react";
 
+import { IProps } from "./types";
 import styles from "./order-details.module.css";
 import doneIcon from "../../images/done.png";
 
-const OrderDetails = ({ order }) => {
+const OrderDetails: FC<IProps> = ({ order }) => {
   return (
     <div className={styles.order}>
       <p className="text text_type_digits-large mt-4 mb-8">{order}</p>
@@ -23,10 +24,6 @@ const OrderDetails = ({ order }) => {
       </p>
     </div>
   );
-};
-
-OrderDetails.propTypes = {
-  order: PropTypes.string.isRequired,
 };
 
 export default OrderDetails;

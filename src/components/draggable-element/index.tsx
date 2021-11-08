@@ -1,26 +1,23 @@
-import { useRef } from "react";
+import { FC, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
 
-import PropTypes from "prop-types";
 import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-
-import { cardObj } from "../../utils/types";
 
 import {
   DELETE_INGREDIENT,
   SORT_INGREDIENTS,
 } from "../../services/actions/burger-constructor";
 import { DECREASE_INGREDIENT_COUNT } from "../../services/actions/burger-ingredients";
-
+import { IProps } from "./types";
 import styles from "./draggable-element.module.css";
 
-const DraggableElement = ({ index, item }) => {
+const DraggableElement: FC<IProps> = ({ index, item }) => {
   const dispatch = useDispatch();
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   const [{ isDragging }, dragRef] = useDrag({
     type: "itemBurger",
@@ -37,16 +34,18 @@ const DraggableElement = ({ index, item }) => {
         handlerId: monitor.getHandlerId(),
       };
     },
-    hover(item, monitor) {
+    hover(item: { index: number; id: string }, monitor) {
       if (!ref.current) return;
       const dragIndex = item.index;
       const hoverIndex = index;
 
       if (dragIndex === hoverIndex) return;
-      const hoverBoundingRect = ref.current?.getBoundingClientRect();
-      const hoverMiddleY =
-        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+
+      const hoverBoundingRect = ref.current.getBoundingClientRect();
+      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       const clientOffset = monitor.getClientOffset();
+      if (clientOffset === null) return;
+
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
 
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) return;
@@ -82,16 +81,10 @@ const DraggableElement = ({ index, item }) => {
         text={item.name}
         thumbnail={item.image_mobile}
         price={item.price}
-        draggable={true}
         handleClose={onDelete}
       />
     </div>
   );
-};
-
-DraggableElement.propTypes = {
-  index: PropTypes.number.isRequired,
-  item: cardObj.isRequired,
 };
 
 export default DraggableElement;
