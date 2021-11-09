@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -8,9 +8,9 @@ import { SELECT_INGREDIENT } from "../../services/actions/ingredient-details";
 
 import styles from "./ingredient.module.css";
 
-export const IngredientPage = () => {
+export const IngredientPage: FC = () => {
   const dispatch = useDispatch();
-  const { ingredients } = useSelector((store) => store.ingredients);
+  const { ingredients } = useSelector((store: any) => store.ingredients);
   const { ingredientId } = useParams();
 
   useEffect(() => {

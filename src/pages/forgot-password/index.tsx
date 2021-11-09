@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -13,11 +13,11 @@ import { forgotPassword } from "../../services/actions/auth";
 
 import styles from "./forgot-password.module.css";
 
-export const ForgotPassword = () => {
+export const ForgotPassword: FC = () => {
   const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();
-  const { isAuthorized } = useSelector((store) => store.auth);
+  const { isAuthorized } = useSelector((store: any) => store.auth);
 
   const [values, setFormValues] = useState({
     email: "",
@@ -39,8 +39,6 @@ export const ForgotPassword = () => {
       },
     });
   };
-
-console.log(location)
 
   if (isAuthorized) {
     return (

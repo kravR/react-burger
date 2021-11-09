@@ -1,4 +1,4 @@
-import { useEffect, memo } from "react";
+import { useEffect, memo, FC } from "react";
 import { NavLink, Route, Switch, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -9,7 +9,7 @@ import { getUser, logout } from "../../services/actions/auth";
 
 import styles from "./profile.module.css";
 
-export const Profile = memo(() => {
+export const Profile: FC = memo(() => {
   const history = useHistory();
   const dispatch = useDispatch();
 

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useLocation } from "react-router-dom";
 
 import {
   Button,
@@ -10,16 +10,16 @@ import {
 
 import { Form } from "../../components/form";
 
-import { registration } from "../../services/actions/auth";
+import { login } from "../../services/actions/auth";
 
-import styles from "./register.module.css";
+import styles from "./login.module.css";
 
-export const RegisterPage = () => {
+export const LoginPage: FC = () => {
+  const { state } = useLocation();
   const dispatch = useDispatch();
-  const { isAuthorized, isError, error } = useSelector((store) => store.auth);
+  const { isAuthorized, isError, error } = useSelector((store: any) => store.auth);
 
   const [values, setFormValues] = useState({
-    name: "",
     email: "",
     password: "",
   });
@@ -32,58 +32,60 @@ export const RegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(registration(values));
+    await dispatch(login(values));
   };
 
   if (isAuthorized) {
-    return <Redirect to={{ pathname: "/" }} />;
+    return <Redirect to={state?.from || "/"} />;
   }
 
   return (
     <div className={styles.page}>
-      <h3 className="text text_type_main-medium mb-6">Регистрация</h3>
+      <h3 className="text text_type_main-medium mb-6">Вход</h3>
       <Form onSubmit={handleSubmit}>
-        <Input
-          placeholder="Имя"
-          name="name"
-          required
-          value={values.name}
-          onChange={handleChange}
-        />
         <Input
           type="email"
           placeholder="E-mail"
           name="email"
-          required
           value={values.email}
           onChange={handleChange}
         />
         <PasswordInput
           name="password"
-          required
           value={values.password}
           onChange={handleChange}
         />
         <Button type="primary" size="medium">
-          Регистрация
+          Войти
         </Button>
       </Form>
 
       {isError && (
         <p className={`${styles.error} text text_type_main-default mt-6`}>
-          {error.message}
+          {error?.message}
         </p>
       )}
 
       <div className={`${styles.links} mt-20 mb-4`}>
         <p className="text text_type_main-default text_color_inactive mr-1">
-          Уже зарегистрированы?
+          Вы — новый пользователь?
         </p>
         <Link
-          to="/login"
+          to="/register"
           className={`${styles.link} text text_type_main-default`}
         >
-          Войти
+          Зарегистрироваться
+        </Link>
+      </div>
+      <div className={styles.links}>
+        <p className="text text_type_main-default text_color_inactive mr-1">
+          Забыли пароль?
+        </p>
+        <Link
+          to="/forgot-password"
+          className={`${styles.link} text text_type_main-default`}
+        >
+          Восстановить пароль
         </Link>
       </div>
     </div>

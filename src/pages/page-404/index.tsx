@@ -1,10 +1,11 @@
+import { FC } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import styles from "./page-404.module.css";
 
-export const Page404 = () => {
+export const Page404: FC = () => {
   const history = useHistory();
 
   const handleClick = () => {

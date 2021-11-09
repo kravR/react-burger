@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { FC, useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -12,11 +12,11 @@ import { updateUser } from "../../../services/actions/auth";
 
 import styles from "../profile.module.css";
 
-export const ProfileForm = () => {
+export const ProfileForm: FC = () => {
   const dispatch = useDispatch();
-  const nameRef = useRef(null);
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   const onFocusInput = (inputRef) =>
     inputRef.current.classList.add(`${styles.active}`);
@@ -25,7 +25,7 @@ export const ProfileForm = () => {
   const onIconClick = (inputRef) => inputRef.current.focus();
 
   const { isLoading, isError, user, error } = useSelector(
-    (store) => store.auth
+    (store: any) => store.auth
   );
 
   const [values, setFormValues] = useState({
@@ -76,7 +76,6 @@ export const ProfileForm = () => {
               name="name"
               placeholder="Имя"
               icon="EditIcon"
-              required
               ref={nameRef}
               value={values.name}
               onChange={handleChange}
@@ -91,7 +90,6 @@ export const ProfileForm = () => {
               placeholder="Логин"
               icon="EditIcon"
               ref={emailRef}
-              required
               value={values.email}
               onChange={handleChange}
               onFocus={() => onFocusInput(emailRef)}
@@ -104,7 +102,6 @@ export const ProfileForm = () => {
               placeholder="Пароль"
               icon="EditIcon"
               ref={passwordRef}
-              required
               value={values.password}
               onChange={handleChange}
               onFocus={() => onFocusInput(passwordRef)}
