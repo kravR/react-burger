@@ -21,3 +21,38 @@ export interface IIngredientData {
   uuid?: string;
 }
 
+export interface IRegistrationParams {
+  email: string, 
+  password: string, 
+  name: string 
+}
+
+export interface ILoginParams {
+  email: string; 
+  password: string;
+}
+
+export interface IForgotPasswordParams {
+  email: string; 
+}
+
+export interface IResetPasswordParams {
+  password: string; 
+  token: string; 
+}
+
+export interface IUserResponse {
+  email: string;
+  name: string;
+}
+
+export interface IUserUpdateParams extends IRegistrationParams {}
+
+export interface IOrderParams {
+  ingredients: Array<string>; 
+}
+
+export interface IOrderResponse {
+  number: string; 
+}
+

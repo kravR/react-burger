@@ -1,7 +1,7 @@
-import { API_URL } from "../../utils/constants";
-import { ServerError } from "../../utils/ServerError";
+import { API_URL } from "../../../utils/constants";
+import { ServerError } from "../../ServerError";
 
-function request(url, method, body) {
+function request(url: string, method: string, body?: any) {
   return fetch(url, {
     method,
     headers: {
@@ -10,13 +10,13 @@ function request(url, method, body) {
     },
     body,
   })
-    .then((response) => {
+    .then((response: Response) => {
       if (!response.ok) {
         return Promise.reject(response);
       }
       return response.json();
     })
-    .catch(async (response) => {
+    .catch(async (response: Response) => {
       const error = await response.json().then((response) => response);
       return Promise.reject(new ServerError(error.message, response.status));
     });

@@ -1,8 +1,8 @@
-import { API_URL } from "../../utils/constants";
-import { ServerError } from "../../utils/ServerError";
+import { API_URL } from "../../../utils/constants";
+import { ServerError } from "../../ServerError";
 import { refreshToken } from "../token";
 
-function request(url, method, body) {
+function request(url: string, method: string, body?: any): Promise<any> {
   return fetch(url, {
     method,
     headers: {
@@ -12,28 +12,35 @@ function request(url, method, body) {
     },
     body,
   })
-    .then((response) => {
+    .then((response: Response) => {
       if (!response.ok) {
         return Promise.reject(response);
       }
 
       return response.json();
     })
-    .catch(async (response) => {
+    .catch(async (response: Response): Promise<void> => {
       const error = await response.json().then((response) => response);
 
       if (error.message === "jwt expired") {
-        if (!request.refreshPromise) {
-          request.refreshPromise = refreshToken().then((response) => {
-            delete request.refreshPromise;
-            return response;
-          });
+        const requestWithRefresh = request as unknown as {
+          refreshPromise: Promise<any> | undefined;
+        };
+
+        if (!requestWithRefresh.refreshPromise) {
+          requestWithRefresh.refreshPromise = refreshToken().then(
+            (response) => {
+              delete requestWithRefresh.refreshPromise;
+              return response;
+            }
+          );
         }
 
-        return request.refreshPromise.then(() => request(url, method, body));
+        return requestWithRefresh.refreshPromise.then(() =>
+          request(url, method, body)
+        );
       }
 
-      
       return Promise.reject(new ServerError(error.message, response.status));
     });
 }

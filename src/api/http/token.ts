@@ -1,6 +1,6 @@
-import * as publicApi from "./common/publicApi";
+import * as publicApi from "./core/publicApi";
 
-export function refreshToken() {
+export function refreshToken(): Promise<void> {
   return publicApi
     .post("auth/token", { token: localStorage.getItem("refreshToken") })
     .then((response) => {
