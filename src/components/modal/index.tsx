@@ -11,7 +11,7 @@ const Modal: FC<IProps> = ({ title, onClose, children }) => {
   const modalRoot = document.querySelector("#modals") as HTMLElement;
 
   useEffect(() => {
-    const handleClose = (event) => {
+    const handleClose = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         onClose();
       }

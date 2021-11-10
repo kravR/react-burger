@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, FC, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
 
@@ -10,7 +10,7 @@ import {
 import { Form } from "../../components/form";
 
 import { resetPassword } from "../../services/actions/auth";
-
+import { IResetPasswordParams } from "../../utils/types";
 import styles from "./reset-password.module.css";
 
 export const ResetPassword: FC = () => {
@@ -25,19 +25,19 @@ export const ResetPassword: FC = () => {
     inputRef.current.focus();
   };
 
-  const [values, setFormValues] = useState({
+  const [values, setFormValues] = useState<IResetPasswordParams>({
     password: "",
     token: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFormValues((prevState) => {
-      return { ...prevState, [e.target.name]: e.target.value };
+      return { ...prevState, [event.target.name]: event.target.value };
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     await dispatch(resetPassword(values));
     history.replace({
       pathname: "/login",
@@ -68,7 +68,7 @@ export const ResetPassword: FC = () => {
           type={type ? "text" : "password"}
           name="password"
           placeholder="Введите новый пароль"
-          icon={type ? "HideIcon": "ShowIcon"}
+          icon={type ? "HideIcon" : "ShowIcon"}
           ref={passwordRef}
           value={values.password}
           onChange={handleChange}

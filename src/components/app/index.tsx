@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { Switch, Route, useLocation, useHistory } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -13,20 +13,20 @@ import {
   ForgotPassword,
   ResetPassword,
   Profile,
-} from "./pages";
+} from "../../pages";
 
-import { Header } from "./components/header";
-import { ProtectedRoute } from "./components/protected-route";
-import IngredientDetails from "./components/ingredient-details";
-import Modal from "./components/modal";
-import { Container } from "./components/container";
+import { Header } from "../header";
+import { ProtectedRoute } from "../protected-route";
+import IngredientDetails from "../ingredient-details";
+import Modal from "../modal";
+import { Container } from "../container";
 
-import { getIngredientsData } from "./services/actions/burger-ingredients";
-import { CLOSE_INGREDIENT_DETAILS } from "./services/actions/ingredient-details";
+import { getIngredientsData } from "../../services/actions/burger-ingredients";
+import { CLOSE_INGREDIENT_DETAILS } from "../../services/actions/ingredient-details";
 
-import { ILocationState } from "./utils/types";
+import { ILocationState } from "../../utils/types";
 
-const App = () => {
+const App: FC = () => {
   const history = useHistory();
   const location = useLocation<ILocationState>();
   const dispatch = useDispatch();

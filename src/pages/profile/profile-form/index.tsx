@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useRef } from "react";
+import { ChangeEvent, FormEvent, FC, useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -7,9 +7,8 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import { Form } from "../../../components/form";
-
 import { updateUser } from "../../../services/actions/auth";
-
+import { IUserUpdateParams } from "../../../utils/types";
 import styles from "../profile.module.css";
 
 export const ProfileForm: FC = () => {
@@ -28,7 +27,7 @@ export const ProfileForm: FC = () => {
     (store: any) => store.auth
   );
 
-  const [values, setFormValues] = useState({
+  const [values, setFormValues] = useState<IUserUpdateParams>({
     name: user?.name ?? "",
     email: user?.email ?? "",
     password: "",
@@ -42,15 +41,15 @@ export const ProfileForm: FC = () => {
     });
   };
 
-  const handleChange = (e) => {
-    e.preventDefault();
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
     setFormValues((prevState) => {
-      return { ...prevState, [e.target.name]: e.target.value };
+      return { ...prevState, [event.target.name]: event.target.value };
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     await dispatch(updateUser(values));
   };
 

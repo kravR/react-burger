@@ -8,7 +8,7 @@ import { ITabsData } from "./types";
 import styles from "./burger-ingredients.module.css";
 
 const BurgerIngredients: FC = () => {
-  const [currentTab, setCurrentTab] = useState("bun");
+  const [currentTab, setCurrentTab] = useState<string>("bun");
   const { ingredients } = useSelector((store: any) => store.ingredients);
 
   const bun = useMemo(

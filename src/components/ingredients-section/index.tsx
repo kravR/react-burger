@@ -18,7 +18,7 @@ const IngredientsSection = forwardRef<HTMLDivElement, IProps>(
     const location = useLocation();
     const dispatch = useDispatch();
 
-    const handleCardDetail = (id) => {
+    const handleCardDetail = (id: string) => {
       dispatch({
         type: SELECT_INGREDIENT,
         ingredient: data.find((item) => item._id === id),

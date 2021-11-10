@@ -31,7 +31,7 @@ import {
   RESET_ORDER,
   SET_ORDER_ITEMS,
 } from "../../services/actions/order";
-
+import {  IIngredientData } from "../../utils/types"
 import styles from "./burger-constructor.module.css";
 
 const BurgerConstructor: FC = () => {
@@ -62,7 +62,7 @@ const BurgerConstructor: FC = () => {
     dispatch({ type: RESET_ORDER });
   };
 
-  const handleDrop = (element) => {
+  const handleDrop = (element: IIngredientData) => {
     if (element.type === "bun") {
       dispatch({ type: CLEAR_BUN_COUNT });
       dispatch({
@@ -92,7 +92,7 @@ const BurgerConstructor: FC = () => {
     collect: (monitor) => ({
       isHover: monitor.isOver(),
     }),
-    drop(item) {
+    drop(item: IIngredientData) {
       handleDrop(item);
     },
   });

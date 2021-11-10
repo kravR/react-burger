@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { ChangeEvent, FormEvent, FC, useState } from "react";
 import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -8,9 +8,8 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import { Form } from "../../components/form";
-
 import { forgotPassword } from "../../services/actions/auth";
-
+import { IForgotPasswordParams } from "../../utils/types";
 import styles from "./forgot-password.module.css";
 
 export const ForgotPassword: FC = () => {
@@ -19,18 +18,18 @@ export const ForgotPassword: FC = () => {
   const dispatch = useDispatch();
   const { isAuthorized } = useSelector((store: any) => store.auth);
 
-  const [values, setFormValues] = useState({
+  const [values, setFormValues] = useState<IForgotPasswordParams>({
     email: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFormValues((prevState) => {
-      return { ...prevState, [e.target.name]: e.target.value };
+      return { ...prevState, [event.target.name]: event.target.value };
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     await dispatch(forgotPassword(values));
     history.replace({
       pathname: "/reset-password",

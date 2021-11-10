@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { ChangeEvent, FormEvent, FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 
@@ -9,29 +9,30 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import { Form } from "../../components/form";
-
 import { registration } from "../../services/actions/auth";
-
+import { IRegistrationParams } from "../../utils/types";
 import styles from "./register.module.css";
 
 export const RegisterPage: FC = () => {
   const dispatch = useDispatch();
-  const { isAuthorized, isError, error } = useSelector((store: any) => store.auth);
+  const { isAuthorized, isError, error } = useSelector(
+    (store: any) => store.auth
+  );
 
-  const [values, setFormValues] = useState({
+  const [values, setFormValues] = useState<IRegistrationParams>({
     name: "",
     email: "",
     password: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFormValues((prevState) => {
-      return { ...prevState, [e.target.name]: e.target.value };
+      return { ...prevState, [event.target.name]: event.target.value };
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     await dispatch(registration(values));
   };
 
