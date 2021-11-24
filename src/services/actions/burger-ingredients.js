@@ -1,4 +1,4 @@
-import * as ingredientService from "../../api/ingredient";
+import * as ingredientService from "../../api/http/ingredient";
 
 export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
 export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";

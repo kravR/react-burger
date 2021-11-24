@@ -1,5 +1,5 @@
-import * as authService from "../../api/auth";
-import * as userService from "../../api/user";
+import * as authService from "../../api/http/auth";
+import * as userService from "../../api/http/user";
 
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";

@@ -1,6 +1,6 @@
 .item {
   display: flex;
-  align-items: center; 
+  align-items: center;
 }
 
 :global(.constructor-element) {
