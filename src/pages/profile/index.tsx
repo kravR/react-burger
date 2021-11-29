@@ -1,11 +1,11 @@
 import { useEffect, memo, FC } from "react";
 import { NavLink, Route, Switch, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 import { ProfileForm } from "./profile-form";
 import { ProfileOrders } from "./profile-orders";
 
 import { getUser, logout } from "../../services/actions/auth";
+import { useDispatch } from '../../services/hooks';
 
 import styles from "./profile.module.css";
 

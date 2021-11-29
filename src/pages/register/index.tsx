@@ -1,5 +1,4 @@
 import { ChangeEvent, FormEvent, FC, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 
 import {
@@ -10,7 +9,8 @@ import {
 
 import { Form } from "../../components/form";
 import { registration } from "../../services/actions/auth";
-import { IRegistrationParams } from "../../utils/types";
+import { IRegistrationParams } from "../../services/types/data";
+import { useDispatch, useSelector } from '../../services/hooks';
 import styles from "./register.module.css";
 
 export const RegisterPage: FC = () => {

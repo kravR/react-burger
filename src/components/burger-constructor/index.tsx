@@ -1,6 +1,5 @@
 import { FC, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 
 import {
@@ -12,6 +11,8 @@ import {
 import Modal from "../modal";
 import OrderDetails from "../order-details";
 import DraggableElement from "../draggable-element";
+
+import { useDispatch, useSelector } from '../../services/hooks';
 
 import {
   ADD_BUN,
@@ -31,7 +32,7 @@ import {
   RESET_ORDER,
   SET_ORDER_ITEMS,
 } from "../../services/actions/order";
-import {  IIngredientData } from "../../utils/types"
+import {  IIngredientData } from "../../services/types/data"
 import styles from "./burger-constructor.module.css";
 
 const BurgerConstructor: FC = () => {

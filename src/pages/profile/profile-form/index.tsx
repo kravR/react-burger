@@ -1,5 +1,4 @@
 import { ChangeEvent, FormEvent, FC, useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 import {
   Button,
@@ -8,7 +7,8 @@ import {
 
 import { Form } from "../../../components/form";
 import { updateUser } from "../../../services/actions/auth";
-import { IUserUpdateParams } from "../../../utils/types";
+import { IUserUpdateParams } from "../../../services/types/data";
+import { useDispatch, useSelector } from "../../../services/hooks";
 import styles from "../profile.module.css";
 
 export const ProfileForm: FC = () => {
@@ -108,9 +108,7 @@ export const ProfileForm: FC = () => {
               onIconClick={() => onIconClick(passwordRef)}
             />
             {isError && (
-              <p
-                className={`${styles.error} text text_type_main-default my-4`}
-              >
+              <p className={`${styles.error} text text_type_main-default my-4`}>
                 {error?.message}
               </p>
             )}

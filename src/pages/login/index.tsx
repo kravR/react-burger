@@ -1,5 +1,4 @@
 import { ChangeEvent, FormEvent, FC, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect, useLocation } from "react-router-dom";
 
 import {
@@ -10,7 +9,8 @@ import {
 
 import { Form } from "../../components/form";
 import { login } from "../../services/actions/auth";
-import { ILoginParams } from "../../utils/types";
+import { ILoginParams } from "../../services/types/data";
+import { useDispatch, useSelector } from '../../services/hooks';
 import styles from "./login.module.css";
 
 export const LoginPage: FC = () => {

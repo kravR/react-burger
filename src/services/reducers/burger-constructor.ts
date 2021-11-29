@@ -1,3 +1,5 @@
+import { IIngredientData } from "../types/data";
+
 import {
   ADD_BUN,
   DELETE_BUN,
@@ -5,14 +7,23 @@ import {
   DELETE_INGREDIENT,
   SORT_INGREDIENTS,
   RESET_CONSTRUCTOR,
+  TBurgerConstructorActions,
 } from "../actions/burger-constructor";
+
+interface IBurgerConstructorState {
+  bun: IIngredientData | null;
+  filling: IIngredientData[];
+}
 
 const initialState = {
   bun: null,
   filling: [],
 };
 
-export const burger = (state = initialState, action) => {
+export const burger = (
+  state = initialState,
+  action: TBurgerConstructorActions
+): IBurgerConstructorState => {
   switch (action.type) {
     case ADD_BUN:
       return {
@@ -22,7 +33,7 @@ export const burger = (state = initialState, action) => {
     case DELETE_BUN:
       return {
         ...state,
-        bun: {},
+        bun: null,
       };
     case ADD_INGREDIENT:
       return {
@@ -35,7 +46,9 @@ export const burger = (state = initialState, action) => {
     case DELETE_INGREDIENT:
       return {
         ...state,
-        filling: state.filling.filter((item) => item.uuid !== action.id),
+        filling: [...(state.filling as Array<IIngredientData>)].filter(
+          (item) => item.uuid !== action.id
+        ),
       };
     case SORT_INGREDIENTS:
       const arr = [...state.filling];

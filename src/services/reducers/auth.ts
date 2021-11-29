@@ -1,3 +1,5 @@
+import { IErrorResponse, IUserResponse } from "../types/data";
+
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -20,7 +22,17 @@ import {
   RESET_PASSWORD_REQUEST,
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_FAILED,
+  TAuthActions,
 } from "../actions/auth";
+
+interface IAuthState {
+  user: IUserResponse | null;
+  error: IErrorResponse | null;
+  isLoading: boolean;
+  isError: boolean;
+  isAuthorized: boolean;
+  isReset: boolean;
+}
 
 export const initialState = {
   user: null,
@@ -31,7 +43,10 @@ export const initialState = {
   isReset: false,
 };
 
-export const auth = (state = initialState, action) => {
+export const auth = (
+  state = initialState,
+  action: TAuthActions
+): IAuthState => {
   switch (action.type) {
     case LOGIN_REQUEST:
       return {
@@ -50,7 +65,7 @@ export const auth = (state = initialState, action) => {
     case LOGIN_FAILED:
       return {
         ...state,
-        user: {},
+        user: null,
         error: action.error,
         isLoading: false,
         isError: true,
@@ -82,6 +97,7 @@ export const auth = (state = initialState, action) => {
       };
     case REGISTRATION_SUCCESS:
       return {
+        ...state,
         error: null,
         user: action.user,
         isLoading: false,
@@ -139,6 +155,7 @@ export const auth = (state = initialState, action) => {
       };
     case USER_SUCCESS:
       return {
+        ...state,
         error: null,
         user: action.user,
         isLoading: false,

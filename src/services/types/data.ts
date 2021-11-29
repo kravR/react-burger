@@ -53,6 +53,12 @@ export interface IOrderParams {
 }
 
 export interface IOrderResponse {
-  number: string; 
+  number: number; 
+}
+
+export interface IErrorResponse {
+  status: number;
+  message: string;
+  stack: string;
 }
 

@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import { Switch, Route, useLocation, useHistory } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from '../../services/hooks';
 
 import {
   IngredientPage,
@@ -24,7 +24,7 @@ import { Container } from "../container";
 import { getIngredientsData } from "../../services/actions/burger-ingredients";
 import { CLOSE_INGREDIENT_DETAILS } from "../../services/actions/ingredient-details";
 
-import { ILocationState } from "../../utils/types";
+import { ILocationState } from "../../services/types/data";
 
 const App: FC = () => {
   const history = useHistory();

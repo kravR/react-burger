@@ -35,7 +35,8 @@ const Card: FC<IProps> = ({ data, onDetail }) => {
       <h3 className={`${styles.card__title} text text_type_main-default`}>
         {data?.name}
       </h3>
-      {data?.qty && <Counter count={data?.qty} size="default" />}
+
+      {(!!data?.qty && data.qty > 0) && <Counter count={data?.qty} size="default" />}
     </article>
   );
 };

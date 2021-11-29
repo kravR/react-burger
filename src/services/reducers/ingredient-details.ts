@@ -1,15 +1,26 @@
+import { IIngredientData } from "../types/data";
+
 import {
   SELECT_INGREDIENT,
   OPEN_INGREDIENT_DETAILS,
   CLOSE_INGREDIENT_DETAILS,
+  TIngredientDetailsActions,
 } from "../actions/ingredient-details";
+
+interface IIngredientDetailsState {
+  ingredient: IIngredientData | {};
+  visibleModal: boolean;
+}
 
 const initialState = {
   ingredient: {},
   visibleModal: false,
 };
 
-export const ingredient = (state = initialState, action) => {
+export const ingredient = (
+  state = initialState,
+  action: TIngredientDetailsActions
+): IIngredientDetailsState => {
   switch (action.type) {
     case SELECT_INGREDIENT:
       return {

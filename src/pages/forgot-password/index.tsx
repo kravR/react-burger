@@ -1,6 +1,5 @@
 import { ChangeEvent, FormEvent, FC, useState } from "react";
 import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 
 import {
   Button,
@@ -9,7 +8,8 @@ import {
 
 import { Form } from "../../components/form";
 import { forgotPassword } from "../../services/actions/auth";
-import { IForgotPasswordParams } from "../../utils/types";
+import { IForgotPasswordParams } from "../../services/types/data";
+import { useDispatch, useSelector } from '../../services/hooks';
 import styles from "./forgot-password.module.css";
 
 export const ForgotPassword: FC = () => {

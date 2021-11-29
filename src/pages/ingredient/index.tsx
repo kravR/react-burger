@@ -1,10 +1,11 @@
 import { FC, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 
 import IngredientDetails from "../../components/ingredient-details";
 
 import { SELECT_INGREDIENT } from "../../services/actions/ingredient-details";
+
+import { useDispatch, useSelector } from '../../services/hooks';
 
 import styles from "./ingredient.module.css";
 

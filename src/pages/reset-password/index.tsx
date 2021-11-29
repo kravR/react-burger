@@ -1,5 +1,4 @@
 import { ChangeEvent, FormEvent, FC, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
 
 import {
@@ -10,7 +9,8 @@ import {
 import { Form } from "../../components/form";
 
 import { resetPassword } from "../../services/actions/auth";
-import { IResetPasswordParams } from "../../utils/types";
+import { IResetPasswordParams } from "../../services/types/data";
+import { useDispatch, useSelector } from '../../services/hooks';
 import styles from "./reset-password.module.css";
 
 export const ResetPassword: FC = () => {

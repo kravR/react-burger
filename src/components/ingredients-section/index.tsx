@@ -1,6 +1,5 @@
 import { forwardRef } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 import Card from "../card";
 
@@ -8,6 +7,8 @@ import {
   SELECT_INGREDIENT,
   OPEN_INGREDIENT_DETAILS,
 } from "../../services/actions/ingredient-details";
+
+import { useDispatch } from '../../services/hooks';
 
 import { IProps } from "./types";
 import styles from "./ingredients-section.module.css";

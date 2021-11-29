@@ -1,3 +1,5 @@
+import { IIngredientData } from "../types/data";
+
 import {
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESS,
@@ -5,7 +7,16 @@ import {
   OPEN_ORDER_MODAL,
   RESET_ORDER,
   SET_ORDER_ITEMS,
+  TOrderActions
 } from "../actions/order";
+
+interface IOrderState {
+  number: number | 0,
+  ingredients: Array<IIngredientData> | [],
+  isLoading: boolean,
+  isError: boolean,
+  visibleModal: boolean,
+};
 
 export const initialState = {
   number: 0,
@@ -15,7 +26,7 @@ export const initialState = {
   visibleModal: false,
 };
 
-export const order = (state = initialState, action) => {
+export const order = (state = initialState, action: TOrderActions): IOrderState => {
   switch (action.type) {
     case GET_ORDER_REQUEST:
       return {
@@ -33,7 +44,7 @@ export const order = (state = initialState, action) => {
     case GET_ORDER_FAILED:
       return {
         ...state,
-        data: [],
+        ingredients: [],
         isLoading: false,
         isError: true,
       };

@@ -1,5 +1,4 @@
 import { FC, useRef } from "react";
-import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
 
 import {
@@ -12,6 +11,7 @@ import {
   SORT_INGREDIENTS,
 } from "../../services/actions/burger-constructor";
 import { DECREASE_INGREDIENT_COUNT } from "../../services/actions/burger-ingredients";
+import { useDispatch } from '../../services/hooks';
 import { IProps } from "./types";
 import styles from "./draggable-element.module.css";
 

@@ -6,7 +6,7 @@ import {
   IRegistrationParams,
   IResetPasswordParams,
   IUserResponse,
-} from "../../utils/types";
+} from "../../services/types/data";
 
 export function registration(params: IRegistrationParams): Promise<IUserResponse> {
   return publicApi.post("auth/register", params).then((response) => {
