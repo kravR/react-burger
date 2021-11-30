@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import { IProps } from "./types";
-import styles from "./order-details.module.css";
+import styles from "./styles.module.css";
 import doneIcon from "../../images/done.png";
 
 const OrderDetails: FC<IProps> = ({ order }) => {

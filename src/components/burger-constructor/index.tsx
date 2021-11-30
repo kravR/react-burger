@@ -33,7 +33,8 @@ import {
   SET_ORDER_ITEMS,
 } from "../../services/actions/order";
 import {  IIngredientData } from "../../services/types/data"
-import styles from "./burger-constructor.module.css";
+
+import styles from "./styles.module.css";
 
 const BurgerConstructor: FC = () => {
   const history = useHistory();

@@ -4,8 +4,9 @@ import ReactDOM from "react-dom";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import ModalOverlay from "../modal-overlay";
+
 import { IProps } from "./types";
-import styles from "./modal.module.css";
+import styles from "./styles.module.css";
 
 const Modal: FC<IProps> = ({ title, onClose, children }) => {
   const modalRoot = document.querySelector("#modals") as HTMLElement;

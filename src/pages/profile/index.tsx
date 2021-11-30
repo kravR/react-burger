@@ -7,7 +7,7 @@ import { ProfileOrders } from "./profile-orders";
 import { getUser, logout } from "../../services/actions/auth";
 import { useDispatch } from '../../services/hooks';
 
-import styles from "./profile.module.css";
+import styles from "./styles.module.css";
 
 export const Profile: FC = memo(() => {
   const history = useHistory();

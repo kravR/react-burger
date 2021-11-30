@@ -5,7 +5,8 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import IngredientsSection from "../ingredients-section";
 import { ITabsData } from "./types";
-import styles from "./burger-ingredients.module.css";
+
+import styles from "./styles.module.css";
 
 const BurgerIngredients: FC = () => {
   const [currentTab, setCurrentTab] = useState<string>("bun");

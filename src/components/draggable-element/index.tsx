@@ -12,8 +12,9 @@ import {
 } from "../../services/actions/burger-constructor";
 import { DECREASE_INGREDIENT_COUNT } from "../../services/actions/burger-ingredients";
 import { useDispatch } from '../../services/hooks';
+
 import { IProps } from "./types";
-import styles from "./draggable-element.module.css";
+import styles from "./styles.module.css";
 
 const DraggableElement: FC<IProps> = ({ index, item }) => {
   const dispatch = useDispatch();

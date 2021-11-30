@@ -11,7 +11,8 @@ import { Form } from "../../components/form";
 import { registration } from "../../services/actions/auth";
 import { IRegistrationParams } from "../../services/types/data";
 import { useDispatch, useSelector } from '../../services/hooks';
-import styles from "./register.module.css";
+
+import styles from "./styles.module.css";
 
 export const RegisterPage: FC = () => {
   const dispatch = useDispatch();

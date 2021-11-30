@@ -2,12 +2,10 @@ import { FC, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import IngredientDetails from "../../components/ingredient-details";
-
 import { SELECT_INGREDIENT } from "../../services/actions/ingredient-details";
-
 import { useDispatch, useSelector } from '../../services/hooks';
 
-import styles from "./ingredient.module.css";
+import styles from "./styles.module.css";
 
 export const IngredientPage: FC = () => {
   const dispatch = useDispatch();

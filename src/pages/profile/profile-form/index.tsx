@@ -9,7 +9,8 @@ import { Form } from "../../../components/form";
 import { updateUser } from "../../../services/actions/auth";
 import { IUserUpdateParams } from "../../../services/types/data";
 import { useDispatch, useSelector } from "../../../services/hooks";
-import styles from "../profile.module.css";
+
+import styles from "../styles.module.css";
 
 export const ProfileForm: FC = () => {
   const dispatch = useDispatch();

@@ -11,7 +11,7 @@ import {
 import { useDispatch } from '../../services/hooks';
 
 import { IProps } from "./types";
-import styles from "./ingredients-section.module.css";
+import styles from "./styles.module.css";
 
 const IngredientsSection = forwardRef<HTMLDivElement, IProps>(
   ({ title, data }, ref) => {

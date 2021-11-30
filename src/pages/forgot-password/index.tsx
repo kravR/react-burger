@@ -10,7 +10,8 @@ import { Form } from "../../components/form";
 import { forgotPassword } from "../../services/actions/auth";
 import { IForgotPasswordParams } from "../../services/types/data";
 import { useDispatch, useSelector } from '../../services/hooks';
-import styles from "./forgot-password.module.css";
+
+import styles from "./styles.module.css";
 
 export const ForgotPassword: FC = () => {
   const history = useHistory();

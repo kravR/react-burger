@@ -11,7 +11,8 @@ import { Form } from "../../components/form";
 import { login } from "../../services/actions/auth";
 import { ILoginParams } from "../../services/types/data";
 import { useDispatch, useSelector } from '../../services/hooks';
-import styles from "./login.module.css";
+
+import styles from "./styles.module.css";
 
 export const LoginPage: FC = () => {
   const { state } = useLocation();

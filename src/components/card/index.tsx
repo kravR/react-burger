@@ -7,7 +7,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import { IProps } from "./types";
-import styles from "./card.module.css";
+import styles from "./styles.module.css";
 
 const Card: FC<IProps> = ({ data, onDetail }) => {
   const [{ opacity }, ref] = useDrag({
