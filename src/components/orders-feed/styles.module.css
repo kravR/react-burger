@@ -1,0 +1,9 @@
+.orders-feed {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 60px;
+  gap: 16px;
+  overflow: auto;
+  padding-right: 16px;
+}

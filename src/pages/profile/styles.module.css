@@ -2,12 +2,12 @@
   display: flex;
   width: 100%;
   margin: 120px auto;
+  overflow: hidden;
 }
 
 .menu {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   margin-right: 80px;
   min-width: 320px;
 }

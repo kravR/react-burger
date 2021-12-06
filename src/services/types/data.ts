@@ -52,6 +52,14 @@ export interface IOrderParams {
   ingredients: Array<string>; 
 }
 
+export interface IOrderData {
+  number: number;
+  createdAt: string;
+  name:string;
+  ingredients: Array<string>;
+  status?: string;
+}
+
 export interface IOrderResponse {
   number: number; 
 }
