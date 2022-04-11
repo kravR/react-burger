@@ -3,12 +3,9 @@ import { useHistory, useLocation } from "react-router-dom";
 
 import Card from "../card";
 
-import {
-  SELECT_INGREDIENT,
-  OPEN_INGREDIENT_DETAILS,
-} from "../../services/actions/ingredient-details";
+import { SELECT_INGREDIENT } from "../../services/actions/ingredient-details";
 
-import { useDispatch } from '../../services/hooks';
+import { useDispatch } from "../../services/hooks";
 
 import { IProps } from "./types";
 import styles from "./styles.module.css";
@@ -24,11 +21,8 @@ const IngredientsSection = forwardRef<HTMLDivElement, IProps>(
         type: SELECT_INGREDIENT,
         ingredient: data.find((item) => item._id === id),
       });
-      dispatch({
-        type: OPEN_INGREDIENT_DETAILS,
-      });
       history.push({
-        pathname: "/ingredients/" + id,
+        pathname: `ingredients/${id}`,
         state: { background: location },
       });
     };

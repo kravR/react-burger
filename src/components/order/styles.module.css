@@ -5,6 +5,9 @@
   background-color: #1c1c21;
   padding: 24px;
   box-sizing: border-box;
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
 }
 
 .info {

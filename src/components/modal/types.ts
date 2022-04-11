@@ -1,4 +1,6 @@
+import { SyntheticEvent } from 'react';
+
 export interface IProps {
   title?: string;
-  onClose: () => void;
+  onClose: (e?: KeyboardEvent | Event | SyntheticEvent | undefined) => void;
 }

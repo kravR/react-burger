@@ -1,35 +1,34 @@
 import { FC } from "react";
 
-import { orders } from "../../utils/constants";
-
+import { IProps } from "./types"
 import styles from "./styles.module.css";
 
-const OrdersSummary: FC = () => {
-  const total = 28752;
-  const totalToday = 138;
+const OrdersSummary: FC<IProps> = ({ ordersReady = [], ordersInProgress = [], total, totalToday }) => {
 
   return (
     <div className={styles.summary}>
       <div className={styles.orders}>
-        <div className={styles["orders-in-progress"]}>
-          <div className="text text_type_main-medium">Готовы:</div>
-          {orders.map(
-            (order) =>
-              order.status === "done" && (
-                <div
-                  className="text text_type_digits-default mb-2"
-                  key={order._id}
-                >
-                  {order.number}
-                </div>
-              )
-          )}
-        </div>
+        {ordersReady.length > 0 && (
+          <div className={styles["orders-in-progress"]}>
+            <div className="text text_type_main-medium">Готовы:</div>
+            {ordersReady.map(
+              (order) =>
+                order.status === "done" && (
+                  <div
+                    className="text text_type_digits-default mb-2"
+                    key={order._id}
+                  >
+                    {order.number}
+                  </div>
+                )
+            )}
+          </div>
+        )}
 
-        {orders.length !== 0 && (
+        {ordersInProgress.length > 0 && (
           <div className={styles["orders-in-done"]}>
             <div className="text text_type_main-medium">В работе:</div>
-            {orders.map(
+            {ordersInProgress.map(
               (order) =>
                 order.status === "pending" && (
                   <div

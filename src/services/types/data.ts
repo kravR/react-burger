@@ -53,11 +53,20 @@ export interface IOrderParams {
 }
 
 export interface IOrderData {
+  _id: string;
   number: number;
   createdAt: string;
+  updatedAt: string;
   name:string;
   ingredients: Array<string>;
   status?: string;
+}
+
+export interface IOrdersData {
+  success: boolean;
+  orders: Array<IOrderData>,
+  total: number,
+  totalToday: number,
 }
 
 export interface IOrderResponse {
@@ -70,3 +79,9 @@ export interface IErrorResponse {
   stack: string;
 }
 
+export enum ORDER_STATUSES {
+  DONE = 'done',
+  PENDING = 'pending',
+  CREATEDCrea = 'created',
+  CANCEL = 'cancel'
+}

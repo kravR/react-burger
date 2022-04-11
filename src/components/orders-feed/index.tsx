@@ -1,14 +1,14 @@
 import { FC } from "react";
 
 import Order from "../../components/order"
-import { orders } from "../../utils/constants";
+import { IProps } from "./types"
 
 import styles from "./styles.module.css";
 
-const OrdersFeed: FC = () => {
+const OrdersFeed: FC<IProps> = ( { orders, isUserOrders = false } ) => {
   return (
     <div className={`${styles["orders-feed"]} scrollbar`}>
-      {orders.map((order) => <Order order={order} key={order.number} />)}
+      {orders.map((order) => <Order order={order} key={order.number} isUserOrders={isUserOrders} />)}
     </div>
   );
 };

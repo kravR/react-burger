@@ -24,9 +24,9 @@ const IngredientAvatars: FC<IProps> = ({ items, max }) => {
         </div>
       )}
       {items &&
-        items.slice(items.length - (max - 1), items.length).map((item) => (
-          <div className={styles["avatar-wrap"]} key={item._id}>
-            <IngredientAvatar image={item.image_mobile} alt={item.name} />
+        items.slice(items.length - (max), items.length).map((item) => (
+          <div className={styles["avatar-wrap"]} key={item?._id}>
+            <IngredientAvatar image={item?.image_mobile} alt={item?.name} />
           </div>
         ))}
     </div>

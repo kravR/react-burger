@@ -1,3 +1,5 @@
+import { SyntheticEvent } from 'react';
+
 export interface IProps {
-  onClose: () => void;
+  onClose: (e?: Event | SyntheticEvent) => void;
 }
