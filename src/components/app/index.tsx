@@ -1,4 +1,4 @@
-import { FC, useEffect, SyntheticEvent } from "react";
+import { FC, useEffect } from "react";
 import { Switch, Route, useLocation, useHistory } from "react-router-dom";
 
 import { useDispatch } from '../../services/hooks';
@@ -19,6 +19,7 @@ import { Header } from "../header";
 import { ProtectedRoute } from "../protected-route";
 import IngredientDetails from "../ingredient-details";
 import FeedDetails from "../feed-details";
+import OrderDetails from "../order-details";
 import Modal from "../modal";
 import { Container } from "../container";
 
@@ -34,10 +35,6 @@ const App: FC = () => {
   const action = history.action === "PUSH" || history.action === "REPLACE";
   const background = action && location.state && location.state.background;
 
-  const closeModal = (event: Event | SyntheticEvent | undefined) => {
-    event?.stopPropagation();
-    history.goBack();
-  };
 
   useEffect(() => {
     dispatch(getIngredientsData());
@@ -89,14 +86,26 @@ const App: FC = () => {
 
       {background && (
         <>
+          <Route path={"/create-order"}>
+            <Modal>
+              <OrderDetails />
+            </Modal>
+          </Route>
+
           <Route path={"/ingredients/:ingredientId"}>
-            <Modal onClose={closeModal} title="Детали ингредиента">
+            <Modal title="Детали ингредиента">
               <IngredientDetails />
             </Modal>
           </Route>
-        
+
           <Route path={"/feed/:orderId"}>
-            <Modal onClose={closeModal}>
+            <Modal>
+              <FeedDetails />
+            </Modal>
+          </Route>
+
+          <Route path={"/profiles/orders/:orderId"}>
+            <Modal>
               <FeedDetails />
             </Modal>
           </Route>

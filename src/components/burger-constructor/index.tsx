@@ -1,5 +1,5 @@
 import { FC, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useDrop } from "react-dnd";
 
 import {
@@ -8,8 +8,6 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import Modal from "../modal";
-import OrderDetails from "../order-details";
 import DraggableElement from "../draggable-element";
 
 import { useDispatch, useSelector } from '../../services/hooks';
@@ -27,21 +25,21 @@ import {
 } from "../../services/actions/burger-ingredients";
 
 import {
-  getOrder,
-  OPEN_ORDER_MODAL,
+  createOrder,
   RESET_ORDER,
   SET_ORDER_ITEMS,
 } from "../../services/actions/order";
-import {  IIngredientData } from "../../services/types/data"
+import {  ILocationState, IIngredientData } from "../../services/types/data"
 
 import styles from "./styles.module.css";
 
 const BurgerConstructor: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const location = useLocation<ILocationState>();
   const { isAuthorized } = useSelector((store: any) => store.auth);
   const { bun, filling } = useSelector((store: any) => store.burger);
-  const { visibleModal, number, ingredients } = useSelector(
+  const { ingredients } = useSelector(
     (store: any) => store.order
   );
 
@@ -50,18 +48,19 @@ const BurgerConstructor: FC = () => {
 
   const handleCreateOrder = () => {
     if (isAuthorized) {
-      dispatch(getOrder({ ingredients }));
-      dispatch({ type: OPEN_ORDER_MODAL });
+      dispatch({ type: RESET_ORDER });
+      dispatch(createOrder({ ingredients }));
+      history.push({
+        pathname: "/create-order",
+        state: {
+          background: location,
+        },
+      });
       dispatch({ type: RESET_CONSTRUCTOR });
       dispatch({ type: CLEAR_INGREDIENTS_COUNT });
     } else {
       history.push("/login");
     }
-  };
-
-  const closeModal = () => {
-    dispatch({ type: RESET_CONSTRUCTOR });
-    dispatch({ type: RESET_ORDER });
   };
 
   const handleDrop = (element: IIngredientData) => {
@@ -200,12 +199,6 @@ const BurgerConstructor: FC = () => {
             Оформить заказ
           </Button>
         </div>
-      )}
-
-      {isAuthorized && visibleModal && (
-        <Modal onClose={closeModal}>
-          <OrderDetails order={`${number}`} />
-        </Modal>
       )}
     </div>
   );

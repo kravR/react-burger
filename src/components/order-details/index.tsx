@@ -1,13 +1,17 @@
 import { FC } from "react";
 
-import { IProps } from "./types";
+import { useSelector } from "../../services/hooks";
+
 import styles from "./styles.module.css";
 import doneIcon from "../../images/done.png";
 
-const OrderDetails: FC<IProps> = ({ order }) => {
+const OrderDetails: FC = () => {
+  const { number } = useSelector((store: any) => store.order);
   return (
     <div className={styles.order}>
-      <p className="text text_type_digits-large mt-4 mb-8">{(Number(order) > 0) ? order : "-"}</p>
+      <p className="text text_type_digits-large mt-4 mb-8">
+        {Number(number) > 0 ? number : "-"}
+      </p>
       <p className="text text_type_main-medium mb-15">идентификатор заказа</p>
       <img
         className="mb-15"

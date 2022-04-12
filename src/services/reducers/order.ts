@@ -1,10 +1,12 @@
 import { IIngredientData } from "../types/data";
 
 import {
-  GET_ORDER_REQUEST,
-  GET_ORDER_SUCCESS,
-  GET_ORDER_FAILED,
-  OPEN_ORDER_MODAL,
+  CREATE_ORDER_REQUEST,
+  CREATE_ORDER_SUCCESS,
+  CREATE_ORDER_FAILED,
+  // GET_ORDER_REQUEST,
+  // GET_ORDER_SUCCESS,
+  // GET_ORDER_FAILED,
   RESET_ORDER,
   SET_ORDER_ITEMS,
   TOrderActions
@@ -15,7 +17,6 @@ interface IOrderState {
   ingredients: Array<IIngredientData> | [],
   isLoading: boolean,
   isError: boolean,
-  visibleModal: boolean,
 };
 
 export const initialState = {
@@ -23,17 +24,35 @@ export const initialState = {
   ingredients: [],
   isLoading: false,
   isError: false,
-  visibleModal: false,
 };
 
 export const order = (state = initialState, action: TOrderActions): IOrderState => {
   switch (action.type) {
-    case GET_ORDER_REQUEST:
+    // case GET_ORDER_REQUEST:
+    //   return {
+    //     ...state,
+    //     isLoading: true,
+    //   };
+    // case GET_ORDER_SUCCESS:
+    //   return {
+    //     ...state,
+    //     isLoading: false,
+    //     isError: false,
+    //     order: action.order,
+    //   };
+    // case GET_ORDER_FAILED:
+    //   return {
+    //     ...state,
+    //     order: ,
+    //     isLoading: false,
+    //     isError: true,
+    //   };
+    case CREATE_ORDER_REQUEST:
       return {
         ...state,
         isLoading: true,
       };
-    case GET_ORDER_SUCCESS:
+    case CREATE_ORDER_SUCCESS:
       return {
         ...state,
         isLoading: false,
@@ -41,17 +60,12 @@ export const order = (state = initialState, action: TOrderActions): IOrderState 
         ingredients: [],
         number: action.number,
       };
-    case GET_ORDER_FAILED:
+    case CREATE_ORDER_FAILED:
       return {
         ...state,
         ingredients: [],
         isLoading: false,
         isError: true,
-      };
-    case OPEN_ORDER_MODAL:
-      return {
-        ...state,
-        visibleModal: true,
       };
     case SET_ORDER_ITEMS:
       return {
@@ -59,7 +73,10 @@ export const order = (state = initialState, action: TOrderActions): IOrderState 
         ingredients: action.order,
       };
     case RESET_ORDER:
-      return initialState;
+      return {
+        ...state,
+        number: 0
+      };
     default:
       return state;
   }
