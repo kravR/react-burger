@@ -25,14 +25,16 @@ export const FeedPage: FC = () => {
 
   const ordersReady = useMemo(
     () =>
-      orders.filter(({ status }) => status === ORDER_STATUSES.DONE).slice(0, 5),
+      orders
+        .filter(({ status }) => status === ORDER_STATUSES.DONE)
+        .slice(0, 10),
     [orders]
   );
   const ordersInProgress = useMemo(
     () =>
       orders
         .filter(({ status }) => status === ORDER_STATUSES.PENDING)
-        .slice(0, 5),
+        .slice(0, 10),
     [orders]
   );
 
@@ -47,9 +49,6 @@ export const FeedPage: FC = () => {
       });
     };
   }, [dispatch]);
-
-  console.log(ordersReady)
-  console.log(ordersInProgress)
 
   return (
     <>
