@@ -5,14 +5,16 @@ import {
   WS_CONNECTION_START,
   WS_CONNECTION_CLOSED,
 } from "../../services/actions/wsActions";
-import { WSS_API_ORDERS } from "../../utils/constants";
-import FeedDetails from "../../components/feed-details";
-import { SELECT_ORDER} from "../../services/actions/order";
+import { WSS_API_ORDERS, WSS_API_USER_ORDERS } from "../../utils/constants";
+import { SELECT_ORDER } from "../../services/actions/order";
 import { useDispatch, useSelector } from "../../services/hooks";
+import FeedDetails from "../../components/feed-details";
+
+import { IProps } from "./types";
 
 import styles from "./styles.module.css";
 
-export const OrderPage: FC = () => {
+export const OrderPage: FC<IProps> = ({ isUserOrder }) => {
   const dispatch = useDispatch();
   const { wsConnected, wsError, orders } = useSelector(
     (store: any) => store.ordersFeed
@@ -20,9 +22,14 @@ export const OrderPage: FC = () => {
   const { orderId } = useParams();
 
   useEffect(() => {
+    const accessToken = localStorage
+      .getItem("accessToken")
+      ?.replace("Bearer ", "")
+      .trim();
+
     dispatch({
       type: WS_CONNECTION_START,
-      payload: WSS_API_ORDERS,
+      payload: isUserOrder ? `${WSS_API_USER_ORDERS}?token=${accessToken}` : WSS_API_ORDERS,
     });
 
     return () => {
@@ -30,7 +37,7 @@ export const OrderPage: FC = () => {
         type: WS_CONNECTION_CLOSED,
       });
     };
-  }, [dispatch]);
+  }, [dispatch, isUserOrder]);
 
   useEffect(() => {
     dispatch({

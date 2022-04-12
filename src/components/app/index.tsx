@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import { Switch, Route, useLocation, useHistory } from "react-router-dom";
 
-import { useDispatch } from '../../services/hooks';
+import { useDispatch } from "../../services/hooks";
 
 import {
   IngredientPage,
@@ -32,10 +32,9 @@ const App: FC = () => {
   const history = useHistory();
   const location = useLocation<ILocationState>();
   const dispatch = useDispatch();
- 
+
   const action = history.action === "PUSH" || history.action === "REPLACE";
   const background = action && location.state && location.state.background;
-
 
   useEffect(() => {
     dispatch(getIngredientsData());
@@ -71,16 +70,13 @@ const App: FC = () => {
             <FeedPage />
           </Route>
           <Route path={"/feed/:orderId"} exact>
-            <OrderPage />
+            <OrderPage isUserOrder={false} />
           </Route>
-          <ProtectedRoute path="/profile" exact>
-            <Profile />
-          </ProtectedRoute>
-          <ProtectedRoute path="/profile/orders" exact>
-            <Profile />
-          </ProtectedRoute>
           <ProtectedRoute path="/profile/orders/:orderId" exact>
-            <OrderPage />
+            <OrderPage isUserOrder={true} />
+          </ProtectedRoute>
+          <ProtectedRoute path="/profile">
+            <Profile />
           </ProtectedRoute>
           <Route path="*">
             <Page404 />
@@ -90,29 +86,41 @@ const App: FC = () => {
 
       {background && (
         <>
-          <ProtectedRoute path={"/create-order"}>
-            <Modal>
-              <OrderDetails />
-            </Modal>
-          </ProtectedRoute>
+          <ProtectedRoute
+            path="/create-order"
+            children={
+              <Modal>
+                <OrderDetails />
+              </Modal>
+            }
+          />
 
-          <Route path={"/ingredients/:ingredientId"}>
-            <Modal title="Детали ингредиента">
-              <IngredientDetails />
-            </Modal>
-          </Route>
+          <Route
+            path="/ingredients/:ingredientId"
+            children={
+              <Modal title="Детали ингредиента">
+                <IngredientDetails />
+              </Modal>
+            }
+          />
 
-          <Route path={"/feed/:orderId"}>
-            <Modal>
-              <FeedDetails />
-            </Modal>
-          </Route>
+          <Route
+            path="/feed/:orderId"
+            children={
+              <Modal>
+                <FeedDetails />
+              </Modal>
+            }
+          />
 
-          <ProtectedRoute path={"/profiles/orders/:orderId"}>
-            <Modal>
-              <FeedDetails />
-            </Modal>
-          </ProtectedRoute>
+          <ProtectedRoute
+            path="/profile/orders/:orderId"
+            children={
+              <Modal>
+                <FeedDetails />
+              </Modal>
+            }
+          />
         </>
       )}
     </>

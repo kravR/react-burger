@@ -12,7 +12,7 @@ import { ILocationState } from "../../services/types/data";
 import { IProps } from "./types";
 import styles from "./styles.module.css";
 
-const Order: FC<IProps> = ({ order, isUserOrders = false }) => {
+const Order: FC<IProps> = ({ order, isUserOrder = false }) => {
   const { url } = useRouteMatch();
   const history = useHistory();
   const location = useLocation<ILocationState>();
@@ -59,7 +59,7 @@ const Order: FC<IProps> = ({ order, isUserOrders = false }) => {
         </span>
       </div>
       <h3 className="text text_type_main-medium mb-6">{order.name}</h3>
-      {order.status && isUserOrders && (
+      {order.status && isUserOrder && (
         <div className={`${styles.status} text text_type_main-default mb-6`}>
           {order.status === "done" && (
             <span className={styles.status_done}>Выполнен</span>
