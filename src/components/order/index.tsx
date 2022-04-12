@@ -15,7 +15,7 @@ const Order: FC<IProps> = ({ order, isUserOrders = false }) => {
   const location = useLocation<ILocationState>();
   const { ingredients } = useSelector((store: any) => store.ingredients);
 
-  const uniqueOrderIngredients = Array.from(new Set(order.ingredients));
+  const uniqueOrderIngredients = Array.from(new Set(order.ingredients)).filter(Boolean);
 
   const orderIngredients = uniqueOrderIngredients.map((ingredient) => {
     return ingredients.find((item) => item._id === ingredient);
@@ -54,7 +54,7 @@ const Order: FC<IProps> = ({ order, isUserOrders = false }) => {
 
       <div className={styles.details}>
         {orderIngredients.length && (
-          <IngredientAvatars items={orderIngredients} max={6} />
+          <IngredientAvatars items={orderIngredients} max={5} />
         )}
         <div className={styles.price}>
           <span className="text text_type_digits-default mr-2">{orderPrice}</span>
