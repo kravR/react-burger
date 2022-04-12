@@ -8,6 +8,7 @@ import {
   FeedPage,
   MainPage,
   LoginPage,
+  OrderPage,
   RegisterPage,
   Page404,
   ForgotPassword,
@@ -69,14 +70,17 @@ const App: FC = () => {
           <Route path="/feed" exact>
             <FeedPage />
           </Route>
-          <Route path={"/feed/:feedId"} exact>
-            <FeedDetails />
+          <Route path={"/feed/:orderId"} exact>
+            <OrderPage />
           </Route>
           <ProtectedRoute path="/profile" exact>
             <Profile />
           </ProtectedRoute>
           <ProtectedRoute path="/profile/orders" exact>
             <Profile />
+          </ProtectedRoute>
+          <ProtectedRoute path="/profile/orders/:orderId" exact>
+            <OrderPage />
           </ProtectedRoute>
           <Route path="*">
             <Page404 />
@@ -86,11 +90,11 @@ const App: FC = () => {
 
       {background && (
         <>
-          <Route path={"/create-order"}>
+          <ProtectedRoute path={"/create-order"}>
             <Modal>
               <OrderDetails />
             </Modal>
-          </Route>
+          </ProtectedRoute>
 
           <Route path={"/ingredients/:ingredientId"}>
             <Modal title="Детали ингредиента">
@@ -104,11 +108,11 @@ const App: FC = () => {
             </Modal>
           </Route>
 
-          <Route path={"/profiles/orders/:orderId"}>
+          <ProtectedRoute path={"/profiles/orders/:orderId"}>
             <Modal>
               <FeedDetails />
             </Modal>
-          </Route>
+          </ProtectedRoute>
         </>
       )}
     </>

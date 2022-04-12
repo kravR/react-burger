@@ -1,14 +1,12 @@
-import { IIngredientData } from "../types/data";
+import { IIngredientData, IOrderData } from "../types/data";
 
 import {
   CREATE_ORDER_REQUEST,
   CREATE_ORDER_SUCCESS,
   CREATE_ORDER_FAILED,
-  // GET_ORDER_REQUEST,
-  // GET_ORDER_SUCCESS,
-  // GET_ORDER_FAILED,
   RESET_ORDER,
   SET_ORDER_ITEMS,
+  SELECT_ORDER,
   TOrderActions
 } from "../actions/order";
 
@@ -17,6 +15,7 @@ interface IOrderState {
   ingredients: Array<IIngredientData> | [],
   isLoading: boolean,
   isError: boolean,
+  order: IOrderData | {},
 };
 
 export const initialState = {
@@ -24,29 +23,11 @@ export const initialState = {
   ingredients: [],
   isLoading: false,
   isError: false,
+  order: {}
 };
 
 export const order = (state = initialState, action: TOrderActions): IOrderState => {
   switch (action.type) {
-    // case GET_ORDER_REQUEST:
-    //   return {
-    //     ...state,
-    //     isLoading: true,
-    //   };
-    // case GET_ORDER_SUCCESS:
-    //   return {
-    //     ...state,
-    //     isLoading: false,
-    //     isError: false,
-    //     order: action.order,
-    //   };
-    // case GET_ORDER_FAILED:
-    //   return {
-    //     ...state,
-    //     order: ,
-    //     isLoading: false,
-    //     isError: true,
-    //   };
     case CREATE_ORDER_REQUEST:
       return {
         ...state,
@@ -76,6 +57,11 @@ export const order = (state = initialState, action: TOrderActions): IOrderState 
       return {
         ...state,
         number: 0
+      };
+    case SELECT_ORDER:
+      return {
+        ...state,
+        order: action.order,
       };
     default:
       return state;

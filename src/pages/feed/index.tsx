@@ -16,10 +16,9 @@ import styles from "./styles.module.css";
 export const FeedPage: FC = () => {
   const dispatch = useDispatch();
 
-  const { orders, total, totalToday } = useSelector(
+  const { wsError, wsConnected, orders, total, totalToday } = useSelector(
     (store) => store.ordersFeed
   );
-  const isConnect = useSelector((store) => store.ordersFeed.wsConnected);
 
   const ordersData = useMemo(() => orders, [orders]);
 
@@ -54,21 +53,25 @@ export const FeedPage: FC = () => {
     <>
       <h1 className="text text_type_main-large mt-10 mb-5">Лента заказов</h1>
       <div className={styles.feed}>
-        {isConnect ? (
-          <>
-            <OrdersFeed orders={ordersData} />
-            <OrdersSummary
-              ordersReady={ordersReady}
-              ordersInProgress={ordersInProgress}
-              total={total}
-              totalToday={totalToday}
-            />
-          </>
-        ) : (
-          <h3 className="text text_type_main-default mt-10 mb-5">
-            ...загрузка
-          </h3>
-        )}
+      {!wsError && wsConnected && orders.length === 0 && (
+        <h3 className="text text_type_main-default mt-10 mb-5">...загрузка</h3>
+      )}
+      {!wsError && wsConnected && orders && orders.length > 0 && (
+        <>
+          <OrdersFeed orders={ordersData} />
+          <OrdersSummary
+            ordersReady={ordersReady}
+            ordersInProgress={ordersInProgress}
+            total={total}
+            totalToday={totalToday}
+          />
+        </>
+      )}
+      {wsError && (
+        <h3 className="text text_type_main-default mt-10 mb-5">
+          Произошла ошибка. Проверьте интернет-подключение.
+        </h3>
+      )}
       </div>
     </>
   );

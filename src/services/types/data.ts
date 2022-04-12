@@ -52,13 +52,6 @@ export interface IOrderParams {
   ingredients: Array<string>; 
 }
 
-// export interface IGetOrderParams {
-//   id: Array<string>; 
-// }
-
-// export interface IGetOrderResponse {
-//   order: IOrderData; 
-// }
 
 export interface IOrderData {
   _id: string;

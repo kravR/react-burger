@@ -13,10 +13,7 @@ import styles from "./styles.module.css";
 
 export const ProfileOrders: FC = () => {
   const dispatch = useDispatch();
-
-  const { orders } = useSelector((store) => store.ordersFeed);
-  const isConnect = useSelector((store) => store.ordersFeed.wsConnected);
-
+  const { wsError, wsConnected, orders } = useSelector((store) => store.ordersFeed);
   const ordersData = useMemo(() => orders, [orders]);
 
   useEffect(() => {
@@ -41,13 +38,18 @@ export const ProfileOrders: FC = () => {
     <>
       <h3 className="text text_type_main-medium mb-6">История заказов</h3>
       <div className={styles.history}>
-        {isConnect ? (
-          <OrdersFeed orders={ordersData} isUserOrders />
-        ) : (
-          <h3 className="text text_type_main-default mt-10 mb-5">
-            ...загрузка
-          </h3>
-        )}
+
+      {!wsError && wsConnected && orders.length === 0 && (
+        <h3 className="text text_type_main-default mt-10 mb-5">...загрузка</h3>
+      )}
+      {!wsError && wsConnected && orders && orders.length > 0 && (
+        <OrdersFeed orders={ordersData} />
+      )}
+      {wsError && (
+        <h3 className="text text_type_main-default mt-10 mb-5">
+          Произошла ошибка. Проверьте интернет-подключение.
+        </h3>
+      )}
       </div>
     </>
   );

@@ -30,15 +30,9 @@ export interface IWSGetMessage {
   readonly payload: any;
 }
 
-export interface IWSSendMessage {
-  readonly type: typeof WS_SEND_MESSAGE;
-  readonly payload: any;
-}
-
 export type TWSActions =
   | IWSConnectionStart
   | IWSConnectionSuccess
   | IWSConnectionError
   | IWSConnectionClosed
-  | IWSGetMessage
-  | IWSSendMessage;
+  | IWSGetMessage;
