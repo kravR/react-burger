@@ -25,7 +25,7 @@ export const ProfileForm: FC = () => {
   const onIconClick = (inputRef) => inputRef.current.focus();
 
   const { isLoading, isError, user, error } = useSelector(
-    (store: any) => store.auth
+    (store) => store.auth
   );
 
   const [values, setFormValues] = useState<IUserUpdateParams>({

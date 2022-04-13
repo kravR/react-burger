@@ -1,19 +1,19 @@
-import { useMemo } from "react";
+import { FC, useMemo } from "react";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientAvatar from "../ingregient-avatar";
 import { formatTimeAgo } from "../../utils/formatTimeAgo";
 import { useSelector } from "../../services/hooks";
-
+import { IIngredientData } from "../../services/types/data";
 import styles from "./styles.module.css";
 
-const FeedDetails = () => {
-  const { order } = useSelector((store: any) => store.order);
+const FeedDetails: FC = () => {
+  const { order = null } = useSelector((store) => store.order);
 
-  const { ingredients } = useSelector((store: any) => store.ingredients);
+  const { ingredients } = useSelector((store) => store.ingredients);
   const uniqueOrderIngredients = Array.from(new Set(order?.ingredients)).filter(
     Boolean
   );
-  const orderIngredients = useMemo(() => {
+  const orderIngredients: Array<IIngredientData | undefined> = useMemo(() => {
     return uniqueOrderIngredients.map((ingredient) => {
       return ingredients.find((item) => item._id === ingredient);
     });

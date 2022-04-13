@@ -7,26 +7,29 @@ import {
   RESET_ORDER,
   SET_ORDER_ITEMS,
   SELECT_ORDER,
-  TOrderActions
+  TOrderActions,
 } from "../actions/order";
 
 interface IOrderState {
-  number: number | 0,
-  ingredients: Array<IIngredientData> | [],
-  isLoading: boolean,
-  isError: boolean,
-  order: IOrderData | {},
-};
+  number: number | 0;
+  ingredients: Array<IIngredientData> | [];
+  isLoading: boolean;
+  isError: boolean;
+  order: IOrderData | null;
+}
 
-export const initialState = {
+export const initialState: IOrderState = {
   number: 0,
   ingredients: [],
   isLoading: false,
   isError: false,
-  order: {}
+  order: null,
 };
 
-export const order = (state = initialState, action: TOrderActions): IOrderState => {
+export const order = (
+  state = initialState,
+  action: TOrderActions
+): IOrderState => {
   switch (action.type) {
     case CREATE_ORDER_REQUEST:
       return {
@@ -56,7 +59,7 @@ export const order = (state = initialState, action: TOrderActions): IOrderState 
     case RESET_ORDER:
       return {
         ...state,
-        number: 0
+        number: 0,
       };
     case SELECT_ORDER:
       return {

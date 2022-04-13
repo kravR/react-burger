@@ -17,7 +17,7 @@ import styles from "./styles.module.css";
 export const OrderPage: FC<IProps> = ({ isUserOrder }) => {
   const dispatch = useDispatch();
   const { wsConnected, wsError, orders } = useSelector(
-    (store: any) => store.ordersFeed
+    (store) => store.ordersFeed
   );
   const { orderId } = useParams();
 
@@ -29,7 +29,9 @@ export const OrderPage: FC<IProps> = ({ isUserOrder }) => {
 
     dispatch({
       type: WS_CONNECTION_START,
-      payload: isUserOrder ? `${WSS_API_USER_ORDERS}?token=${accessToken}` : WSS_API_ORDERS,
+      payload: isUserOrder
+        ? `${WSS_API_USER_ORDERS}?token=${accessToken}`
+        : WSS_API_ORDERS,
     });
 
     return () => {

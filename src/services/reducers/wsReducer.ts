@@ -10,7 +10,6 @@ import {
 
 export interface IWSState {
   orders: Array<IOrderData>;
-  success: boolean;
   total: number;
   totalToday: number;
   wsConnected: boolean;
@@ -19,7 +18,6 @@ export interface IWSState {
 
 const initialState: IWSState = {
   orders: [],
-  success: false,
   total: 0,
   totalToday: 0,
   wsConnected: false,
@@ -32,10 +30,10 @@ export const wsReducer = (
 ): IWSState => {
   switch (action.type) {
     case WS_CONNECTION_START:
-        return {
-          ...state,
-          wsConnected: true,
-        };
+      return {
+        ...state,
+        wsConnected: true,
+      };
 
     case WS_CONNECTION_SUCCESS:
       return {
@@ -47,14 +45,18 @@ export const wsReducer = (
       return {
         ...state,
         orders: [],
+        total: 0,
+        totalToday: 0,
         wsConnected: false,
-        wsError: true
+        wsError: true,
       };
 
     case WS_CONNECTION_CLOSED:
       return {
         ...state,
         orders: [],
+        total: 0,
+        totalToday: 0,
         wsConnected: false,
         wsError: false,
       };
@@ -62,7 +64,9 @@ export const wsReducer = (
     case WS_GET_MESSAGE:
       return {
         ...state,
-        ...action.payload,
+        orders: action.payload.orders,
+        total: action.payload.total,
+        totalToday: action.payload.totalToday,
         wsConnected: true,
         wsError: false,
       };

@@ -9,7 +9,7 @@ import {
 import { Form } from "../../components/form";
 import { forgotPassword } from "../../services/actions/auth";
 import { IForgotPasswordParams } from "../../services/types/data";
-import { useDispatch, useSelector } from '../../services/hooks';
+import { useDispatch, useSelector } from "../../services/hooks";
 
 import styles from "./styles.module.css";
 
@@ -17,7 +17,7 @@ export const ForgotPassword: FC = () => {
   const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();
-  const { isAuthorized } = useSelector((store: any) => store.auth);
+  const { isAuthorized } = useSelector((store) => store.auth);
 
   const [values, setFormValues] = useState<IForgotPasswordParams>({
     email: "",

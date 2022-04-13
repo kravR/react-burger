@@ -1,5 +1,12 @@
 import { useEffect, memo, FC } from "react";
-import { NavLink, Route, Switch, useLocation, useHistory, useRouteMatch } from "react-router-dom";
+import {
+  NavLink,
+  Route,
+  Switch,
+  useLocation,
+  useHistory,
+  useRouteMatch,
+} from "react-router-dom";
 
 import { ProfileForm } from "./profile-form";
 import { ProfileOrders } from "./profile-orders";
@@ -15,7 +22,8 @@ export const Profile: FC = memo(() => {
   const location = useLocation<ILocationState>();
   const dispatch = useDispatch();
 
-  const background = history.action === 'PUSH' && location.state && location.state.background;
+  const background =
+    history.action === "PUSH" && location.state && location.state.background;
 
   const handleClickLogOut = async () => {
     await dispatch(logout());

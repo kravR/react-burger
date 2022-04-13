@@ -46,7 +46,7 @@
 }
 
 .form :global(.input__textfield) {
-    color: var(--text-inactive-color);
+  color: var(--text-inactive-color);
 }
 
 .form :global(.input__textfield).active {

@@ -7,5 +7,4 @@ export interface ISelectIngredient {
   readonly ingredient: IIngredientData;
 }
 
-export type TIngredientDetailsActions =
-  | ISelectIngredient;
+export type TIngredientDetailsActions = ISelectIngredient;

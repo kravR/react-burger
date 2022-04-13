@@ -17,8 +17,10 @@ type RelativeTimeFormatUnit =
   | "seconds";
 
 export const presentInteger = (number: number): string => {
-  return new Intl.NumberFormat("en-US", { signDisplay: "exceptZero" }).format(number);
-}
+  return new Intl.NumberFormat("en-US", { signDisplay: "exceptZero" }).format(
+    number
+  );
+};
 
 export const formatTimeAgo = (date: string): string | undefined => {
   const formatter = new Intl.RelativeTimeFormat(undefined, {

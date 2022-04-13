@@ -7,10 +7,10 @@ import styles from "./styles.module.css";
 
 const IngredientAvatars: FC<IProps> = ({ items, max }) => (
   <div className={styles.avatars}>
-    {items.length > max && (
+    {items && items.length > max && (
       <div
         className={styles["avatar-wrap"]}
-        key={items[items.length - max]._id}
+        key={items[items.length - max]?._id}
       >
         <div className={styles.bg}></div>
         <IngredientAvatar

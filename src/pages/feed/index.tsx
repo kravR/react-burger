@@ -53,25 +53,27 @@ export const FeedPage: FC = () => {
     <>
       <h1 className="text text_type_main-large mt-10 mb-5">Лента заказов</h1>
       <div className={styles.feed}>
-      {!wsError && wsConnected && orders.length === 0 && (
-        <h3 className="text text_type_main-default mt-10 mb-5">...загрузка</h3>
-      )}
-      {!wsError && wsConnected && orders && orders.length > 0 && (
-        <>
-          <OrdersFeed orders={ordersData} />
-          <OrdersSummary
-            ordersReady={ordersReady}
-            ordersInProgress={ordersInProgress}
-            total={total}
-            totalToday={totalToday}
-          />
-        </>
-      )}
-      {wsError && (
-        <h3 className="text text_type_main-default mt-10 mb-5">
-          Произошла ошибка. Проверьте интернет-подключение.
-        </h3>
-      )}
+        {!wsError && wsConnected && orders.length === 0 && (
+          <h3 className="text text_type_main-default mt-10 mb-5">
+            ...загрузка
+          </h3>
+        )}
+        {!wsError && wsConnected && orders && orders.length > 0 && (
+          <>
+            <OrdersFeed orders={ordersData} />
+            <OrdersSummary
+              ordersReady={ordersReady}
+              ordersInProgress={ordersInProgress}
+              total={total}
+              totalToday={totalToday}
+            />
+          </>
+        )}
+        {wsError && (
+          <h3 className="text text_type_main-default mt-10 mb-5">
+            Произошла ошибка. Проверьте интернет-подключение.
+          </h3>
+        )}
       </div>
     </>
   );

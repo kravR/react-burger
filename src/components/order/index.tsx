@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import { useHistory, useLocation, useRouteMatch } from "react-router-dom";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -7,7 +7,7 @@ import IngredientAvatars from "../../components/ingregient-avatars";
 import { useSelector } from "../../services/hooks";
 import { SELECT_ORDER } from "../../services/actions/order";
 import { useDispatch } from "../../services/hooks";
-import { ILocationState } from "../../services/types/data";
+import { ILocationState, IIngredientData } from "../../services/types/data";
 
 import { IProps } from "./types";
 import styles from "./styles.module.css";
@@ -17,15 +17,17 @@ const Order: FC<IProps> = ({ order, isUserOrder = false }) => {
   const history = useHistory();
   const location = useLocation<ILocationState>();
   const dispatch = useDispatch();
-  const { ingredients } = useSelector((store: any) => store.ingredients);
+  const { ingredients } = useSelector((store) => store.ingredients);
 
   const uniqueOrderIngredients = Array.from(new Set(order.ingredients)).filter(
     Boolean
   );
 
-  const orderIngredients = uniqueOrderIngredients.map((ingredient) => {
-    return ingredients.find((item) => item._id === ingredient);
-  });
+  const orderIngredients: Array<IIngredientData | undefined> = useMemo(() => {
+    return uniqueOrderIngredients.map((ingredient) => {
+      return ingredients.find((item) => item._id === ingredient);
+    });
+  }, [ingredients, uniqueOrderIngredients]);
 
   const orderPrice = orderIngredients.reduce((acc, current) => {
     if (current && current.type === "bun") {
@@ -72,7 +74,7 @@ const Order: FC<IProps> = ({ order, isUserOrder = false }) => {
       )}
 
       <div className={styles.details}>
-        {orderIngredients.length && (
+        {orderIngredients && orderIngredients.length && (
           <IngredientAvatars items={orderIngredients} max={5} />
         )}
         <div className={styles.price}>

@@ -9,7 +9,7 @@ import {
 import { Form } from "../../components/form";
 import { resetPassword } from "../../services/actions/auth";
 import { IResetPasswordParams } from "../../services/types/data";
-import { useDispatch, useSelector } from '../../services/hooks';
+import { useDispatch, useSelector } from "../../services/hooks";
 
 import styles from "./styles.module.css";
 
@@ -17,7 +17,7 @@ export const ResetPassword: FC = () => {
   const { state } = useLocation();
   const history = useHistory();
   const dispatch = useDispatch();
-  const { isAuthorized, isReset } = useSelector((store: any) => store.auth);
+  const { isAuthorized, isReset } = useSelector((store) => store.auth);
   const [type, setType] = useState(false);
   const passwordRef = useRef<HTMLInputElement>(null);
   const onPassIconClick = (inputRef) => {

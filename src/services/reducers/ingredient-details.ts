@@ -6,11 +6,11 @@ import {
 } from "../actions/ingredient-details";
 
 interface IIngredientDetailsState {
-  ingredient: IIngredientData | {};
+  ingredient: IIngredientData | null;
 }
 
-const initialState = {
-  ingredient: {}
+const initialState: IIngredientDetailsState = {
+  ingredient: null,
 };
 
 export const ingredient = (

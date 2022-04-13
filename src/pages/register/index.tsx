@@ -10,15 +10,13 @@ import {
 import { Form } from "../../components/form";
 import { registration } from "../../services/actions/auth";
 import { IRegistrationParams } from "../../services/types/data";
-import { useDispatch, useSelector } from '../../services/hooks';
+import { useDispatch, useSelector } from "../../services/hooks";
 
 import styles from "./styles.module.css";
 
 export const RegisterPage: FC = () => {
   const dispatch = useDispatch();
-  const { isAuthorized, isError, error } = useSelector(
-    (store: any) => store.auth
-  );
+  const { isAuthorized, isError, error } = useSelector((store) => store.auth);
 
   const [values, setFormValues] = useState<IRegistrationParams>({
     name: "",
@@ -70,7 +68,7 @@ export const RegisterPage: FC = () => {
 
       {isError && (
         <p className={`${styles.error} text text_type_main-default mt-6`}>
-          {error.message}
+          {error?.message}
         </p>
       )}
 

@@ -12,7 +12,7 @@ import styles from "./styles.module.css";
 const BurgerIngredients: FC = () => {
   const [currentTab, setCurrentTab] = useState<string>("bun");
   const { isLoading, isError, ingredients } = useSelector(
-    (store: any) => store.ingredients
+    (store) => store.ingredients
   );
   const dispatch = useDispatch();
 

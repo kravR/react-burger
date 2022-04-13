@@ -43,7 +43,6 @@ export type TOrderActions =
   | ISetOrderItems
   | ISelectOrder;
 
-
 export const createOrder: AppThunk = (data) => (dispatch: AppDispatch) => {
   dispatch({
     type: CREATE_ORDER_REQUEST,

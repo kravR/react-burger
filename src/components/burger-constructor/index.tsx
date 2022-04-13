@@ -10,7 +10,7 @@ import {
 
 import DraggableElement from "../draggable-element";
 
-import { useDispatch, useSelector } from '../../services/hooks';
+import { useDispatch, useSelector } from "../../services/hooks";
 
 import {
   ADD_BUN,
@@ -29,7 +29,7 @@ import {
   RESET_ORDER,
   SET_ORDER_ITEMS,
 } from "../../services/actions/order";
-import {  ILocationState, IIngredientData } from "../../services/types/data"
+import { ILocationState, IIngredientData } from "../../services/types/data";
 
 import styles from "./styles.module.css";
 
@@ -37,11 +37,9 @@ const BurgerConstructor: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const location = useLocation<ILocationState>();
-  const { isAuthorized } = useSelector((store: any) => store.auth);
-  const { bun, filling } = useSelector((store: any) => store.burger);
-  const { ingredients } = useSelector(
-    (store: any) => store.order
-  );
+  const { isAuthorized } = useSelector((store) => store.auth);
+  const { bun, filling } = useSelector((store) => store.burger);
+  const { ingredients } = useSelector((store) => store.order);
 
   let cost = filling.reduce((acc, item) => acc + item.price, 0);
   if (bun) cost += 2 * bun.price;
@@ -121,9 +119,9 @@ const BurgerConstructor: FC = () => {
                 <ConstructorElement
                   type="top"
                   isLocked={true}
-                  price={bun.price}
-                  text={`${bun.name} (верх)`}
-                  thumbnail={bun.image_mobile}
+                  price={bun?.price}
+                  text={`${bun?.name} (верх)`}
+                  thumbnail={bun?.image_mobile ? bun?.image_mobile : ""}
                 />
               </div>
             ) : (
@@ -155,13 +153,16 @@ const BurgerConstructor: FC = () => {
             </div>
 
             {bun ? (
-              <div className={`${styles.constructor__item} ml-8`} key={bun._id}>
+              <div
+                className={`${styles.constructor__item} ml-8`}
+                key={bun?._id}
+              >
                 <ConstructorElement
                   type="bottom"
                   isLocked={true}
-                  price={bun.price}
-                  text={`${bun.name} (низ)`}
-                  thumbnail={bun.image_mobile}
+                  price={bun?.price}
+                  text={`${bun?.name} (низ)`}
+                  thumbnail={bun?.image_mobile ? bun?.image_mobile : ""}
                 />
               </div>
             ) : (

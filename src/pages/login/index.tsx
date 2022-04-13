@@ -10,16 +10,14 @@ import {
 import { Form } from "../../components/form";
 import { login } from "../../services/actions/auth";
 import { ILoginParams } from "../../services/types/data";
-import { useDispatch, useSelector } from '../../services/hooks';
+import { useDispatch, useSelector } from "../../services/hooks";
 
 import styles from "./styles.module.css";
 
 export const LoginPage: FC = () => {
   const { state } = useLocation();
   const dispatch = useDispatch();
-  const { isAuthorized, isError, error } = useSelector(
-    (store: any) => store.auth
-  );
+  const { isAuthorized, isError, error } = useSelector((store) => store.auth);
 
   const [values, setFormValues] = useState<ILoginParams>({
     email: "",

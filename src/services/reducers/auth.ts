@@ -34,7 +34,7 @@ interface IAuthState {
   isReset: boolean;
 }
 
-export const initialState = {
+export const initialState: IAuthState = {
   user: null,
   error: null,
   isLoading: false,

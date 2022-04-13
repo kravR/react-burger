@@ -1,6 +1,6 @@
 import thunk from "redux-thunk";
 import { applyMiddleware, compose, createStore } from "redux";
-import { socketMiddleware } from '../../services/middleware';
+import { socketMiddleware } from "../../services/middleware";
 import { WSS_URL } from "../../utils/constants";
 import { rootReducer } from "../reducers";
 
@@ -10,8 +10,7 @@ import {
   WS_CONNECTION_ERROR,
   WS_CONNECTION_CLOSED,
   WS_GET_MESSAGE,
-  WS_SEND_MESSAGE,
-} from '../actions/wsActions';
+} from "../actions/wsActions";
 
 const wsActions = {
   onInit: WS_CONNECTION_START,
@@ -19,7 +18,6 @@ const wsActions = {
   onClose: WS_CONNECTION_CLOSED,
   onError: WS_CONNECTION_ERROR,
   onMessage: WS_GET_MESSAGE,
-  onSendMessage: WS_SEND_MESSAGE,
 };
 
 declare global {
@@ -30,7 +28,8 @@ declare global {
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const enhancer = composeEnhancers(applyMiddleware(thunk, socketMiddleware(WSS_URL, wsActions)));
-
+const enhancer = composeEnhancers(
+  applyMiddleware(thunk, socketMiddleware(WSS_URL, wsActions))
+);
 
 export const store = createStore(rootReducer, enhancer);
