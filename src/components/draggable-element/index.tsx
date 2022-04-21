@@ -1,5 +1,4 @@
 import { FC, useRef } from "react";
-import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
 
 import {
@@ -12,8 +11,10 @@ import {
   SORT_INGREDIENTS,
 } from "../../services/actions/burger-constructor";
 import { DECREASE_INGREDIENT_COUNT } from "../../services/actions/burger-ingredients";
+import { useDispatch } from "../../services/hooks";
+
 import { IProps } from "./types";
-import styles from "./draggable-element.module.css";
+import styles from "./styles.module.css";
 
 const DraggableElement: FC<IProps> = ({ index, item }) => {
   const dispatch = useDispatch();
@@ -42,7 +43,8 @@ const DraggableElement: FC<IProps> = ({ index, item }) => {
       if (dragIndex === hoverIndex) return;
 
       const hoverBoundingRect = ref.current.getBoundingClientRect();
-      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      const hoverMiddleY =
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       const clientOffset = monitor.getClientOffset();
       if (clientOffset === null) return;
 
@@ -78,9 +80,9 @@ const DraggableElement: FC<IProps> = ({ index, item }) => {
     >
       <DragIcon type="primary" />
       <ConstructorElement
-        text={item.name}
-        thumbnail={item.image_mobile}
-        price={item.price}
+        text={item?.name}
+        thumbnail={item?.image_mobile ? item?.image_mobile : ""}
+        price={item?.price}
         handleClose={onDelete}
       />
     </div>

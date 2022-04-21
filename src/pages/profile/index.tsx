@@ -1,17 +1,29 @@
 import { useEffect, memo, FC } from "react";
-import { NavLink, Route, Switch, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import {
+  NavLink,
+  Route,
+  Switch,
+  useLocation,
+  useHistory,
+  useRouteMatch,
+} from "react-router-dom";
 
 import { ProfileForm } from "./profile-form";
 import { ProfileOrders } from "./profile-orders";
-
+import { ILocationState } from "../../services/types/data";
 import { getUser, logout } from "../../services/actions/auth";
+import { useDispatch } from "../../services/hooks";
 
-import styles from "./profile.module.css";
+import styles from "./styles.module.css";
 
 export const Profile: FC = memo(() => {
+  const { path } = useRouteMatch();
   const history = useHistory();
+  const location = useLocation<ILocationState>();
   const dispatch = useDispatch();
+
+  const background =
+    history.action === "PUSH" && location.state && location.state.background;
 
   const handleClickLogOut = async () => {
     await dispatch(logout());
@@ -54,11 +66,11 @@ export const Profile: FC = memo(() => {
         </div>
       </div>
       <div className={styles.content}>
-        <Switch>
-          <Route path="/profile" exact>
+        <Switch location={background || location}>
+          <Route path={`${path}/`} exact>
             <ProfileForm />
           </Route>
-          <Route path="/profile/orders" exact>
+          <Route path={`${path}/orders`} exact>
             <ProfileOrders />
           </Route>
         </Switch>

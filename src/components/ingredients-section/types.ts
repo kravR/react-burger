@@ -1,4 +1,4 @@
-import { IIngredientData } from "../../utils/types";
+import { IIngredientData } from "../../services/types/data";
 
 export interface IProps {
   title: string;

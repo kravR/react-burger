@@ -1,0 +1,54 @@
+.page {
+  display: flex;
+  width: 100%;
+  margin: 120px auto;
+  overflow: hidden;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  margin-right: 80px;
+  min-width: 320px;
+}
+
+.link {
+  width: 100%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  white-space: nowrap;
+  color: #8585ad;
+}
+
+.link:hover {
+  cursor: pointer;
+  color: #f2f2f3;
+}
+
+.link_active {
+  color: #fff;
+}
+
+.content {
+  width: 100%;
+}
+
+.form_btns {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.error {
+  color: var(--colors-interface-error);
+}
+
+.form :global(.input__textfield) {
+  color: var(--text-inactive-color);
+}
+
+.form :global(.input__textfield).active {
+  color: var(--text-dark);
+}

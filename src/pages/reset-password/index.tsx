@@ -1,5 +1,4 @@
 import { ChangeEvent, FormEvent, FC, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
 
 import {
@@ -8,16 +7,17 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import { Form } from "../../components/form";
-
 import { resetPassword } from "../../services/actions/auth";
-import { IResetPasswordParams } from "../../utils/types";
-import styles from "./reset-password.module.css";
+import { IResetPasswordParams } from "../../services/types/data";
+import { useDispatch, useSelector } from "../../services/hooks";
+
+import styles from "./styles.module.css";
 
 export const ResetPassword: FC = () => {
   const { state } = useLocation();
   const history = useHistory();
   const dispatch = useDispatch();
-  const { isAuthorized, isReset } = useSelector((store: any) => store.auth);
+  const { isAuthorized, isReset } = useSelector((store) => store.auth);
   const [type, setType] = useState(false);
   const passwordRef = useRef<HTMLInputElement>(null);
   const onPassIconClick = (inputRef) => {

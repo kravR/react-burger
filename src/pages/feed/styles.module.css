@@ -1,0 +1,5 @@
+.feed {
+  display: flex;
+  gap: 60px;
+  overflow: hidden;
+}

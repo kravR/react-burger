@@ -2,6 +2,7 @@ import { MainPage } from "./main";
 import { IngredientPage } from "./ingredient";
 import { FeedPage } from "./feed";
 import { LoginPage } from "./login";
+import { OrderPage } from "./order";
 import { RegisterPage } from "./register";
 import { ForgotPassword } from "./forgot-password";
 import { ResetPassword } from "./reset-password";
@@ -13,6 +14,7 @@ export {
   IngredientPage,
   FeedPage,
   LoginPage,
+  OrderPage,
   RegisterPage,
   Page404,
   ForgotPassword,

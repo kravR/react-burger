@@ -1,15 +1,23 @@
 import { FC } from "react";
 import { useDrag } from "react-dnd";
+import { useHistory, useLocation } from "react-router-dom";
 
 import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import { IProps } from "./types";
-import styles from "./card.module.css";
+import { SELECT_INGREDIENT } from "../../services/actions/ingredient-details";
+import { useDispatch } from "../../services/hooks";
 
-const Card: FC<IProps> = ({ data, onDetail }) => {
+import { IProps } from "./types";
+import styles from "./styles.module.css";
+
+const Card: FC<IProps> = ({ data }) => {
+  const history = useHistory();
+  const location = useLocation();
+  const dispatch = useDispatch();
+
   const [{ opacity }, ref] = useDrag({
     type: "item",
     item: { ...data },
@@ -18,10 +26,21 @@ const Card: FC<IProps> = ({ data, onDetail }) => {
     }),
   });
 
+  const handleCardDetail = (id: string) => {
+    dispatch({
+      type: SELECT_INGREDIENT,
+      ingredient: data,
+    });
+    history.push({
+      pathname: `ingredients/${id}`,
+      state: { background: location },
+    });
+  };
+
   return (
     <article
       className={styles.card}
-      onClick={() => onDetail(data?._id)}
+      onClick={() => handleCardDetail(data?._id)}
       ref={ref}
       style={{ opacity }}
     >
@@ -35,7 +54,10 @@ const Card: FC<IProps> = ({ data, onDetail }) => {
       <h3 className={`${styles.card__title} text text_type_main-default`}>
         {data?.name}
       </h3>
-      {data?.qty && <Counter count={data?.qty} size="default" />}
+
+      {!!data?.qty && data.qty > 0 && (
+        <Counter count={data?.qty} size="default" />
+      )}
     </article>
   );
 };

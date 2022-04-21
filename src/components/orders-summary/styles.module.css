@@ -1,0 +1,24 @@
+.summary {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.orders {
+  display: flex;
+  margin-bottom: 60px;
+}
+
+.orders-in-progress {
+  width: 100%;
+  margin-right: 36px;
+}
+
+.orders-in-done {
+  width: 100%;
+}
+
+.text-shadow {
+  text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25),
+    0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5);
+}

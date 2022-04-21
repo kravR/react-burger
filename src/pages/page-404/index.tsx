@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import styles from "./page-404.module.css";
+import styles from "./styles.module.css";
 
 export const Page404: FC = () => {
   const history = useHistory();

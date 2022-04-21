@@ -1,6 +1,5 @@
 import { ChangeEvent, FormEvent, FC, useState } from "react";
 import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 
 import {
   Button,
@@ -9,14 +8,16 @@ import {
 
 import { Form } from "../../components/form";
 import { forgotPassword } from "../../services/actions/auth";
-import { IForgotPasswordParams } from "../../utils/types";
-import styles from "./forgot-password.module.css";
+import { IForgotPasswordParams } from "../../services/types/data";
+import { useDispatch, useSelector } from "../../services/hooks";
+
+import styles from "./styles.module.css";
 
 export const ForgotPassword: FC = () => {
   const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();
-  const { isAuthorized } = useSelector((store: any) => store.auth);
+  const { isAuthorized } = useSelector((store) => store.auth);
 
   const [values, setFormValues] = useState<IForgotPasswordParams>({
     email: "",

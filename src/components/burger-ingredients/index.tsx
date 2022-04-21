@@ -1,15 +1,20 @@
 import { FC, useEffect, useMemo, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/hooks";
 
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 
+import { getIngredientsData } from "../../services/actions/burger-ingredients";
 import IngredientsSection from "../ingredients-section";
 import { ITabsData } from "./types";
-import styles from "./burger-ingredients.module.css";
+
+import styles from "./styles.module.css";
 
 const BurgerIngredients: FC = () => {
   const [currentTab, setCurrentTab] = useState<string>("bun");
-  const { ingredients } = useSelector((store: any) => store.ingredients);
+  const { isLoading, isError, ingredients } = useSelector(
+    (store) => store.ingredients
+  );
+  const dispatch = useDispatch();
 
   const bun = useMemo(
     () => ingredients?.filter((item) => item.type === "bun"),
@@ -57,7 +62,17 @@ const BurgerIngredients: FC = () => {
     }
   });
 
-  return (
+  useEffect(() => {
+    dispatch(getIngredientsData());
+  }, [dispatch]);
+
+  return isLoading ? (
+    <h3 className="text text_type_main-default mt-10 mb-5">...загрузка</h3>
+  ) : isError ? (
+    <h3 className="text text_type_main-default mt-10 mb-5">
+      Произошла ошибка при получении данных
+    </h3>
+  ) : (
     <div className={styles.ingredients}>
       <div className={`${styles.ingredients__tabs} mb-10`}>
         {tabs.map((tab) => (

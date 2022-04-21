@@ -3,7 +3,7 @@ import * as privateApi from "./core/privateApi";
 import {
   IUserResponse,
   IUserUpdateParams
-} from "../../utils/types";
+} from "../../services/types/data";
 
 export function getUser(): Promise<IUserResponse> {
   return privateApi.get("auth/user").then((response) => response.user);

@@ -5,7 +5,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import BurgerIngredients from "../../components/burger-ingredients";
 import BurgerConstructor from "../../components/burger-constructor";
 
-import styles from "./main.module.css";
+import styles from "./styles.module.css";
 
 export const MainPage: FC = () => {
   return (

@@ -8,7 +8,7 @@ import {
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import styles from "./header.module.css";
+import styles from "./styles.module.css";
 
 export const Header: FC = () => {
   const isConstructor = !!useRouteMatch({ path: "/", exact: true });

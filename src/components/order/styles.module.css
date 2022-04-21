@@ -1,0 +1,35 @@
+.order {
+  display: flex;
+  flex-direction: column;
+  border-radius: 40px;
+  background-color: #1c1c21;
+  padding: 24px;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.status {
+  margin-top: 2px;
+}
+
+.status_done {
+  color: #00cccc;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
