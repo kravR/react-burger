@@ -16,7 +16,7 @@ export interface IWSState {
   wsError: boolean;
 }
 
-const initialState: IWSState = {
+export const initialState: IWSState = {
   orders: [],
   total: 0,
   totalToday: 0,

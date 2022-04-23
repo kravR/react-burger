@@ -1,4 +1,4 @@
-import { IIngredientData, IOrderData } from "../types/data";
+import { IOrderData } from "../types/data";
 
 import {
   CREATE_ORDER_REQUEST,
@@ -12,7 +12,7 @@ import {
 
 interface IOrderState {
   number: number | 0;
-  ingredients: Array<IIngredientData> | [];
+  ingredients: Array<string> | [];
   isLoading: boolean;
   isError: boolean;
   order: IOrderData | null;
