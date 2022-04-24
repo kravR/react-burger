@@ -106,7 +106,7 @@ const BurgerConstructor: FC = () => {
   }, [dispatch, filling, bun]);
 
   return (
-    <div className={`${styles.constructor} pl-4`}>
+    <div className={`${styles.constructor} pl-4`} id="constructor">
       <div
         className={`${styles.constructor__items} mb-10`}
         style={{ border: `1px dashed ${borderColor}`, borderRadius: "50px" }}

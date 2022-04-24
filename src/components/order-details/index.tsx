@@ -11,7 +11,7 @@ const OrderDetails: FC = () => {
   const { number } = useSelector((store) => store.order);
   return (
     <div className={styles.order}>
-      <p className="text text_type_digits-large mt-4 mb-8">
+      <p className="text text_type_digits-large mt-4 mb-8" id="order-number">
         {Number(number) > 0 ? number : "-"}
       </p>
       <p className="text text_type_main-medium mb-15">идентификатор заказа</p>

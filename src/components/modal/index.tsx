@@ -35,12 +35,12 @@ const Modal: FC<IProps> = ({ title, children }) => {
   return ReactDOM.createPortal(
     <>
       <ModalOverlay onClose={handleCloseModal} />
-      <div className={styles.modal}>
+      <div className={styles.modal} id="modal">
         <div className={styles["modal__title-wrap"]}>
           <h3 className={`${styles.modal__title} text text_type_main-large`}>
             {title}
           </h3>
-          <span className={styles.modal__close} onClick={handleCloseModal}>
+          <span className={styles.modal__close} onClick={handleCloseModal} id="modal-close">
             <CloseIcon type="primary" />
           </span>
         </div>
