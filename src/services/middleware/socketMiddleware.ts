@@ -30,10 +30,6 @@ export const socketMiddleware = (wsUrl, wsActions): Middleware => {
         socket.onclose = () => {
           dispatch({ type: onClose });
         };
-
-        if (type === onClose) {
-          socket?.close();
-        }
       }
 
       next(action);
