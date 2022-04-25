@@ -1,7 +1,7 @@
 import * as orderService from "../../api/http/order";
 
 import { AppThunk, AppDispatch } from "../types";
-import { IIngredientData, IOrderData } from "../types/data";
+import { IOrderData } from "../types/data";
 
 export const CREATE_ORDER_REQUEST = "CREATE_ORDER_REQUEST" as const;
 export const CREATE_ORDER_SUCCESS = "CREATE_ORDER_SUCCESS" as const;
@@ -27,7 +27,7 @@ export interface IResetOrder {
 
 export interface ISetOrderItems {
   readonly type: typeof SET_ORDER_ITEMS;
-  readonly order: Array<IIngredientData>;
+  readonly order: Array<string>;
 }
 
 export interface ISelectOrder {

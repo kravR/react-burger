@@ -17,7 +17,7 @@ interface IBurgerIngredientsState {
   isError: boolean;
 }
 
-const initialState: IBurgerIngredientsState = {
+export const initialState: IBurgerIngredientsState = {
   ingredients: [],
   isLoading: false,
   isError: false,

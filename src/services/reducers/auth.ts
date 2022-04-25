@@ -25,7 +25,7 @@ import {
   TAuthActions,
 } from "../actions/auth";
 
-interface IAuthState {
+export interface IAuthState {
   user: IUserResponse | null;
   error: IErrorResponse | null;
   isLoading: boolean;

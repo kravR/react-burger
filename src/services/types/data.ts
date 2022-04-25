@@ -74,9 +74,8 @@ export interface IOrderResponse {
 }
 
 export interface IErrorResponse {
-  status: number;
   message: string;
-  stack: string;
+  success?: boolean;
 }
 
 export enum ORDER_STATUSES {

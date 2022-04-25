@@ -37,7 +37,6 @@ export interface IDecreaseIngredientCount {
 
 export interface IClearBunCount {
   readonly type: typeof CLEAR_BUN_COUNT;
-  readonly ingredients: Array<IIngredientData>;
 }
 
 export interface IClearIngredientsCount {
